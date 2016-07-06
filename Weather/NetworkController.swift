@@ -14,10 +14,10 @@ class NetworkController {
     
     static let baseUrl = "http://api.openweathermap.org/data/2.5/weather"
     
-    static func searchWeatherByCity(city: String) -> NSURL? {
+    static func searchWeatherByCity(city: String) -> NSURL {
         let escapedString = city.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet())
         
-        return NSURL(string: baseUrl + "?q=\(escapedString)" + "&appid=\(API_KEY)")
+        return NSURL(string: baseUrl + "?q=\(escapedString!)" + "&appid=\(API_KEY)")!
     }
     
     
