@@ -10,28 +10,34 @@ import Foundation
 
 class NetworkController {
     
-    private static let API_KEY = "4b616d3821d8fe33cc71ba920b04c3ec"
+    fileprivate static let API_KEY = "4b616d3821d8fe33cc71ba920b04c3ec"
     
     static let baseUrl = "http://api.openweathermap.org/data/2.5/weather"
     
-    static func searchWeatherByCity(city: String) -> NSURL {
-        let escapedString = city.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet())
+    
+    
+    
+    
+    static func searchWeatherByCity(_ city: String) -> URL {
+        let escapedString = city.addingPercentEncoding(withAllowedCharacters: CharacterSet())
         
-        return NSURL(string: baseUrl + "?q=\(escapedString!)" + "&appid=\(API_KEY)")!
+        return URL(string: baseUrl + "?q=\(escapedString!)" + "&appid=\(API_KEY)")!
     }
     
     
-    static func dataAtUrl(url: NSURL, completion:(resultData: NSData?) -> Void) {
-        let session = NSURLSession.sharedSession()
+    static func dataAtUrl(_ url: URL, completion:@escaping (_ resultData: Data?) -> Void) {
+        let session = URLSession.shared
         
-        let dataTask = session.dataTaskWithURL(url) { (data, _, error) in
+        let dataTask = session.dataTask(with: url, completionHandler: { (data, _, error) in
             guard let data = data else {
                 print(error?.localizedDescription)
-                completion(resultData: nil)
+                completion(nil)
                 return
             }
-            completion(resultData: data)
-        }
+            
+            completion(data)
+        }) 
+        
         dataTask.resume()
     }
 }

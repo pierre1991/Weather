@@ -10,26 +10,25 @@ import Foundation
 
 class Weather {
     
-    static let kWeather = "weather"
-    static let kDescription = "description"
-    
-    static let kMain = "main"
-    static let kTemperatue = "temp"
-    static let kHumidity = "humidity"
-	
-    static let kWind = "wind"
-    static let kSpeed = "speed"
-    
-    static let kName = "name"
+    private let kWeather = "weather"
+    private let kCoordinates = "coordinates"
+    private let kDescription = "description"
+    private let kMain = "main"
+    private let kTemperatue = "temp"
+    private let kHumidity = "humidity"
+	private let kWind = "wind"
+    private let kSpeed = "speed"
+    private let kName = "name"
     
     
+    var coordinates: [String:AnyObject]?
     var description: String?
-    var temperatureK: Float?
-    var humidity: Float?
-    var speed: Float?
+    var temperatureK: Double?
+    var humidity: Double?
+    var speed: Double?
     var cityName: String?
     
-    var temperatureC: Float? {
+    var temperatureC: Double? {
         get {
             if let temperatureK = temperatureK {
                 return temperatureK - 273.15
@@ -39,7 +38,7 @@ class Weather {
         }
     }
     
-    var temperatureF: Float? {
+    var temperatureF: Double? {
         get {
             if let temperatureK = temperatureK {
                 return (temperatureK * 1.8) - 459.67
@@ -49,26 +48,34 @@ class Weather {
         }
     }
     
+    
     init?(jsonDictionary: [String:AnyObject]) {
-        if let arrayWeatherKey = jsonDictionary[Weather.kWeather] as? [[String:AnyObject]] {
-            if let description = arrayWeatherKey[0][Weather.kDescription] as? String {
+        if let coord = jsonDictionary[kCoordinates] as? [String:AnyObject] {
+            self.coordinates = coord
+        }
+        
+        if let arrayWeatherKey = jsonDictionary[kWeather] as? [[String:AnyObject]] {
+            if let description = arrayWeatherKey[0][kDescription] as? String {
                 self.description = description
             }
         }
         
-        if let mainDictionary = jsonDictionary[Weather.kMain] as? [String:AnyObject] {
-            if let temperatureK = mainDictionary[Weather.kTemperatue] as? NSNumber {
-                self.temperatureK = Float(temperatureK)
+        if let mainDictionary = jsonDictionary[kMain] as? [String:AnyObject] {
+            if let temperatureK = mainDictionary[kTemperatue] as? NSNumber {
+                self.temperatureK = Double(temperatureK)
+            }
+            if let humidity = mainDictionary[kHumidity] as? NSNumber {
+                self.humidity = Double(humidity)
             }
         }
         
-        if let windDictionary = jsonDictionary[Weather.kSpeed] as? [String:AnyObject] {
-            if let speed = windDictionary[Weather.kSpeed] as? NSNumber {
-                self.speed = Float(speed)
+        if let windDictionary = jsonDictionary[kWind] as? [String:AnyObject] {
+            if let speed = windDictionary[kSpeed] as? NSNumber {
+                self.speed = Double(speed)
             }
         }
         
-        if let cityName = jsonDictionary[Weather.kName] as? String {
+        if let cityName = jsonDictionary[kName] as? String {
             self.cityName = cityName
         }
     }
@@ -83,12 +90,12 @@ class Weather {
         "lat": 51.51
     },
     "weather": [
-    {
-    "id": 800,
-    "main": "Clear",
-    "description": "clear sky",
-    "icon": "01d"
-    }
+      {
+    	"id": 800,
+    	"main": "Clear",
+    	"description": "clear sky",
+    	"icon": "01d"
+      }
     ],
     "base": "cmc stations",
     "main": {
