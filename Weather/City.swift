@@ -1,5 +1,5 @@
 //
-//  Weather.swift
+//  City.swift
 //  Weather
 //
 //  Created by Pierre on 7/6/16.
@@ -8,7 +8,10 @@
 
 import Foundation
 
-class Weather {
+class City: NSObject, NSCoding {
+    
+    private let NSCity = "cityName"
+    private let NSId = "id"
     
     private let kWeather = "weather"
     private let kCoordinates = "coordinates"
@@ -18,15 +21,17 @@ class Weather {
     private let kHumidity = "humidity"
 	private let kWind = "wind"
     private let kSpeed = "speed"
-    private let kName = "name"
+	private let kCityName = "name"
+    private let kId = "id"
     
     
     var coordinates: [String:AnyObject]?
-    var description: String?
+    var weatherDescription: String?
     var temperatureK: Double?
     var humidity: Double?
     var speed: Double?
     var cityName: String?
+    var id: Double?
     
     var temperatureC: Double? {
         get {
@@ -56,7 +61,7 @@ class Weather {
         
         if let arrayWeatherKey = jsonDictionary[kWeather] as? [[String:AnyObject]] {
             if let description = arrayWeatherKey[0][kDescription] as? String {
-                self.description = description
+                self.weatherDescription = description
             }
         }
         
@@ -75,10 +80,28 @@ class Weather {
             }
         }
         
-        if let cityName = jsonDictionary[kName] as? String {
+        if let cityName = jsonDictionary[kCityName] as? String {
             self.cityName = cityName
         }
+        
+        if let id = jsonDictionary[kId] as? Double {
+            self.id = id
+        }
     }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.cityName, forKey: NSCity)
+        aCoder.encode(self.id, forKey: NSId)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        guard let cityName = aDecoder.decodeObject(forKey: NSCity) as? String,
+            let id = aDecoder.decodeObject(forKey: NSId) as? Double else {return}
+        
+        self.cityName = cityName
+        self.id = id
+    }
+    
 }
 
 

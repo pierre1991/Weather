@@ -10,12 +10,24 @@ import Foundation
 
 class WeatherController {
     
+    private let kCity = "city"
+    
+    static let sharedController = WeatherController()
+    
+    
     //MARK: Properties
+    var cityArray: [City] 
+    
+    
+    init() {
+        self.cityArray = []
+        self.loadFromPersistantStorage()
+    }
     
     
     
-    
-    static func getWeatherForCity(_ city: String, completion:@escaping (_ result: Weather?) -> Void) {
+    //MARK: Helper Functions
+    static func getWeatherForCity(_ city: String, completion:@escaping (_ result: City?) -> Void) {
         let url = NetworkController.searchWeatherByCity(city)
         
         NetworkController.dataAtUrl(url, completion: { (resultData) -> Void in
@@ -28,10 +40,10 @@ class WeatherController {
              do {
                 let weatherAnyObject = try JSONSerialization.jsonObject(with: resultData, options: .allowFragments)
                 
-                var weatherModelObject: Weather?
+                var weatherModelObject: City?
                 
                 if let weatherDictionary = weatherAnyObject as? [String:AnyObject] {
-                    weatherModelObject = Weather(jsonDictionary: weatherDictionary)
+                    weatherModelObject = City(jsonDictionary: weatherDictionary)
                 }
                 
                 completion(weatherModelObject)
@@ -40,50 +52,30 @@ class WeatherController {
             }
         })
     }
+    
+    
+    
+    
+    //MARK: NSCoding
+    func saveToPersistantStorage() {
+        NSKeyedArchiver.archiveRootObject(self.cityArray, toFile: self.filePath(key: kCity))
+    }
+    
+    func loadFromPersistantStorage() {
+        guard let unarchivedCities = NSKeyedUnarchiver.unarchiveObject(withFile: self.filePath(key: kCity)) else {return}
+        self.cityArray = unarchivedCities as! [City]
+    }
+    
+    func addCity(city: City) {
+        cityArray.append(city)
+        saveToPersistantStorage()
+    }
+    
+    func filePath(key: String) -> String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .allDomainsMask).first
+        
+        return (url?.appendingPathComponent(key).path)!
+    }
+    
 }
-
-
-
-/*
- {
- "coord": {
- "lon": -0.13,
- "lat": 51.51
- },
- "weather": [
- {
- "id": 800,
- "main": "Clear",
- "description": "clear sky",
- "icon": "01d"
- }
- ],
- "base": "cmc stations",
- "main": {
- "temp": 294.13,
- "pressure": 1022,
- "humidity": 43,
- "temp_min": 291.15,
- "temp_max": 297.59
- },
- "wind": {
- "speed": 3.1,
- "deg": 360
- },
- "clouds": {
- "all": 0
- },
- "dt": 1467822738,
- "sys": {
- "type": 1,
- "id": 5091,
- "message": 0.0078,
- "country": "GB",
- "sunrise": 1467777149,
- "sunset": 1467836275
- },
- "id": 2643743,
- "name": "London",
- "cod": 200
- }
- */

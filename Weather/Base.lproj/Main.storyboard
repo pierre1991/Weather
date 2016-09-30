@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Weather View Controller-->
+        <!--Weather-->
         <scene sceneID="9HO-Lw-oIY">
             <objects>
                 <viewController id="Y5w-2e-r1g" customClass="WeatherViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
@@ -57,6 +57,21 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgQ-BD-eag">
+                                <state key="normal" image="add_button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addCityButtonTapped:" destination="Y5w-2e-r1g" eventType="touchUpInside" id="apc-67-OMT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgX-Qz-agS">
+                                <state key="normal" image="collection_button"/>
+                                <connections>
+                                    <action selector="cityListButtonTapped:" destination="Y5w-2e-r1g" eventType="touchUpInside" id="rLU-cz-KcX"/>
+                                    <segue destination="xdX-bP-2qW" kind="presentation" identifier="toCityView" id="WbA-8A-KgD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.066666666666666666" green="0.14117647058823529" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -72,19 +87,27 @@
                             <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="uY2-lQ-s1M" secondAttribute="bottom" constant="116" id="LjH-CY-mNw"/>
                             <constraint firstItem="uY2-lQ-s1M" firstAttribute="centerX" secondItem="29y-FQ-LGn" secondAttribute="centerX" id="MNU-kq-0ZY"/>
                             <constraint firstItem="uY2-lQ-s1M" firstAttribute="top" secondItem="uQY-hf-ZzD" secondAttribute="bottom" constant="14" id="Qjp-7W-HxV"/>
+                            <constraint firstItem="zgQ-BD-eag" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="466" id="UjZ-Xj-gTZ"/>
+                            <constraint firstItem="tgX-Qz-agS" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="8" id="Vcf-qA-hXj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tgX-Qz-agS" secondAttribute="trailing" constant="267" id="ZN4-ah-zdC"/>
+                            <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="zgQ-BD-eag" secondAttribute="bottom" constant="8" id="ZlV-P6-fTz"/>
                             <constraint firstItem="o2T-4r-MQ7" firstAttribute="trailing" secondItem="Fcw-7V-s9b" secondAttribute="trailing" id="az5-li-TOb"/>
                             <constraint firstItem="tXz-zG-GBy" firstAttribute="centerX" secondItem="29y-FQ-LGn" secondAttribute="centerX" id="cWa-sx-FUe"/>
                             <constraint firstItem="tXz-zG-GBy" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="31" id="ceb-Zy-cJH"/>
+                            <constraint firstAttribute="trailing" secondItem="zgQ-BD-eag" secondAttribute="trailing" constant="8" id="cqW-5M-Opl"/>
                             <constraint firstItem="o2T-4r-MQ7" firstAttribute="top" secondItem="9S9-CO-9VG" secondAttribute="bottom" constant="8" symbolic="YES" id="dKU-ke-34h"/>
                             <constraint firstItem="o2T-4r-MQ7" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leadingMargin" constant="80" id="fCX-0w-oy1"/>
                             <constraint firstItem="tXz-zG-GBy" firstAttribute="top" secondItem="8eO-YU-m66" secondAttribute="bottom" constant="53" id="i1t-Hp-NJ3"/>
+                            <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="tgX-Qz-agS" secondAttribute="bottom" constant="8" id="iOy-wG-jXs"/>
                             <constraint firstItem="o2T-4r-MQ7" firstAttribute="leading" secondItem="Fcw-7V-s9b" secondAttribute="leading" id="ouk-lS-BGy"/>
+                            <constraint firstItem="tgX-Qz-agS" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="467" id="qI2-c1-0Wb"/>
                             <constraint firstItem="Fcw-7V-s9b" firstAttribute="top" secondItem="o2T-4r-MQ7" secondAttribute="bottom" constant="8" symbolic="YES" id="qRU-sD-ydf"/>
                             <constraint firstItem="9S9-CO-9VG" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leadingMargin" constant="4" id="tGJ-Ag-wUW"/>
+                            <constraint firstItem="zgQ-BD-eag" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="282" id="yYz-Bj-Nwr"/>
                             <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="tXz-zG-GBy" secondAttribute="bottom" constant="154" id="zfn-dP-Vq2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="nBj-vT-VbX">
+                    <navigationItem key="navigationItem" title="Weather" id="nBj-vT-VbX">
                         <barButtonItem key="leftBarButtonItem" image="annotation_button" id="RmG-hg-xyr"/>
                         <barButtonItem key="rightBarButtonItem" image="search_button" id="B6t-cf-pUG">
                             <connections>
@@ -93,6 +116,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addCityButton" destination="zgQ-BD-eag" id="T2h-2a-sy8"/>
                         <outlet property="cityName" destination="9S9-CO-9VG" id="2wm-wP-1mn"/>
                         <outlet property="descriptionLabel" destination="Fcw-7V-s9b" id="jeJ-Tw-nXt"/>
                         <outlet property="initialLabel" destination="tXz-zG-GBy" id="MfZ-HS-cgO"/>
@@ -105,6 +129,68 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="shX-Py-Uos" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-292.5" y="430.98591549295776"/>
+        </scene>
+        <!--City List View Controller-->
+        <scene sceneID="IoA-xM-uxS">
+            <objects>
+                <viewController id="xdX-bP-2qW" customClass="CityListViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bi1-rX-QQj"/>
+                        <viewControllerLayoutGuide type="bottom" id="qgz-26-2mD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xTg-UP-PJw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttB-8x-cmm">
+                                <items>
+                                    <navigationItem title="Cities" id="5Xw-y7-gTV">
+                                        <barButtonItem key="rightBarButtonItem" title="X" id="cRN-g1-HXm">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="dismissViewButtonTapped:" destination="xdX-bP-2qW" id="26k-oN-7zG"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Afb-LJ-RbM">
+                                <color key="backgroundColor" red="0.065041117369999998" green="0.14210659270000001" blue="0.30339676139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cityCell" id="0Ug-cf-58y">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Ug-cf-58y" id="xfw-pX-qq3">
+                                            <frame key="frameInset" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.065041117369999998" green="0.14210659270000001" blue="0.30339676139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="xdX-bP-2qW" id="9FQ-tG-Hf4"/>
+                                    <outlet property="delegate" destination="xdX-bP-2qW" id="Rq7-N4-HEM"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.19215686274509802" green="0.29411764705882354" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Afb-LJ-RbM" firstAttribute="top" secondItem="ttB-8x-cmm" secondAttribute="bottom" id="GjQ-2Z-ofa"/>
+                            <constraint firstAttribute="trailing" secondItem="Afb-LJ-RbM" secondAttribute="trailing" id="MYW-2j-1Gv"/>
+                            <constraint firstItem="Afb-LJ-RbM" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="O3E-9h-VJh"/>
+                            <constraint firstItem="qgz-26-2mD" firstAttribute="top" secondItem="Afb-LJ-RbM" secondAttribute="bottom" id="WdS-oa-n08"/>
+                            <constraint firstItem="ttB-8x-cmm" firstAttribute="top" secondItem="Bi1-rX-QQj" secondAttribute="bottom" id="eEz-2W-KqW"/>
+                            <constraint firstAttribute="trailing" secondItem="ttB-8x-cmm" secondAttribute="trailing" id="ngK-th-eog"/>
+                            <constraint firstItem="ttB-8x-cmm" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="vih-pl-25M"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Afb-LJ-RbM" id="1x9-xG-4Ny"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a35-Cm-mfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="457.5" y="430.98591549295776"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sxc-9r-U8N">
@@ -126,7 +212,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add_button" width="32" height="32"/>
         <image name="annotation_button" width="11" height="15"/>
+        <image name="collection_button" width="29" height="29"/>
         <image name="search_button" width="11" height="14"/>
         <image name="weather_logo" width="85" height="63"/>
     </resources>

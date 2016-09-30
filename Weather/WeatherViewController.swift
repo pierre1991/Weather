@@ -11,11 +11,13 @@ import CoreLocation
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
-    
     //MARK: Properties
+    var city: City?
+    
     let locationManager = CLLocationManager()
     var locationLat: Double = 0
     var locationLong: Double = 0
+    
     
     
     //MARK: IBOutlets
@@ -30,7 +32,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var searchButton: UIButton!
 
+    @IBOutlet weak var addCityButton: UIButton!
 
+    
     
     //MARK: View Life Cycle
     override func viewDidLoad() {
@@ -85,6 +89,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             WeatherController.getWeatherForCity(text, completion: { (result) in
                 guard let weatherResult = result else {return}
                 
+                self.city = weatherResult
+                
     			DispatchQueue.main.async(execute: {
                     self.cityName.text = weatherResult.cityName
                     
@@ -94,6 +100,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                     
                     self.descriptionLabel.text = weatherResult.description
                     
+                    
                     self.weatherLogo.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
                     self.searchField.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
                     self.searchButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
@@ -102,11 +109,29 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                         self.cityName.layer.transform = CATransform3DIdentity
                         self.temperatureLabel.layer.transform = CATransform3DIdentity
                         self.descriptionLabel.layer.transform = CATransform3DIdentity
+                        
+                        self.addCityButton.layer.transform = CATransform3DIdentity
                     })
                 })
             })
         }
     }
+    
+    
+    @IBAction func cityListButtonTapped(_ sender: AnyObject) {
+        performSegue(withIdentifier: "toCityView", sender: self)
+    }
+    
+    
+    @IBAction func addCityButtonTapped(_ sender: AnyObject) {
+        guard let city = self.city else {return}
+        
+        WeatherController.sharedController.addCity(city: city)
+    }
+    
+    
+
+    
     
     
     
@@ -120,6 +145,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         
         searchField.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
         searchButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
+        
+        addCityButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, +self.view.frame.height, 0)
     }
     
     

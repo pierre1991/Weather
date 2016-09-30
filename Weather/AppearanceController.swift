@@ -16,4 +16,10 @@ class AppearanceController {
         UINavigationBar.appearance().tintColor = UIColor.white
     }
     
+//    static func setStatusBarBackgroundColor(_ color: UIColor) {
+//        guard let statusBar = (UIApplication.shared.value(forKey: "statusBarWindow") as AnyObject).value(forKey: "statusBar") as? UIView else {return}
+//        
+//        statusBar.backgroundColor = UIColor.mediumDarkBlue()
+//    }
+
 }
