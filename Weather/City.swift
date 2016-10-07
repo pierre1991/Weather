@@ -16,6 +16,7 @@ class City: NSObject, NSCoding {
     private let kWeather = "weather"
     private let kCoordinates = "coordinates"
     private let kDescription = "description"
+    private let kIcon = "icon"
     private let kMain = "main"
     private let kTemperatue = "temp"
     private let kHumidity = "humidity"
@@ -27,6 +28,7 @@ class City: NSObject, NSCoding {
     
     var coordinates: [String:AnyObject]?
     var weatherDescription: String?
+    var icon: String?
     var temperatureK: Double?
     var humidity: Double?
     var speed: Double?
@@ -60,8 +62,9 @@ class City: NSObject, NSCoding {
         }
         
         if let arrayWeatherKey = jsonDictionary[kWeather] as? [[String:AnyObject]] {
-            if let description = arrayWeatherKey[0][kDescription] as? String {
+            if let description = arrayWeatherKey[0][kDescription] as? String, let icon = arrayWeatherKey[0][kIcon] as? String {
                 self.weatherDescription = description
+                self.icon = icon
             }
         }
         

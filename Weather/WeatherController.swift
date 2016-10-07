@@ -11,7 +11,6 @@ import Foundation
 class WeatherController {
     
     private let kCity = "city"
-    
     static let sharedController = WeatherController()
     
     
@@ -26,7 +25,7 @@ class WeatherController {
     
     
     
-    //MARK: Helper Functions
+    //MARK: Builder Functions
     static func getWeatherForCity(_ city: String, completion:@escaping (_ result: City?) -> Void) {
         let url = NetworkController.searchWeatherByCity(city)
         
@@ -53,6 +52,41 @@ class WeatherController {
         })
     }
     
+    static func getWeatherForLocation(_ lat: Double, long: Double, completion: @escaping (_ result: City?) -> Void) {
+        let url = NetworkController.searchWeatherByLocation(lat, lon: long)
+        
+        NetworkController.dataAtUrl(url) { (resultData) in
+            guard let resultData = resultData else {
+                print("NO DATA RETURNED")
+                completion(nil)
+                return
+            }
+            
+            do {
+                let weatherAnyObject = try JSONSerialization.jsonObject(with: resultData, options: .allowFragments)
+                
+                var weatherModelObject: City?
+                
+                if let weatherDictionary = weatherAnyObject as? [String:AnyObject] {
+                    weatherModelObject = City(jsonDictionary: weatherDictionary)
+                }
+                
+                completion(weatherModelObject)
+            } catch {
+                completion(nil)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    //MARK: Helper Functions
+    func addCity(city: City) {
+        cityArray.append(city)
+        saveToPersistantStorage()
+    }
     
     
     
@@ -64,11 +98,6 @@ class WeatherController {
     func loadFromPersistantStorage() {
         guard let unarchivedCities = NSKeyedUnarchiver.unarchiveObject(withFile: self.filePath(key: kCity)) else {return}
         self.cityArray = unarchivedCities as! [City]
-    }
-    
-    func addCity(city: City) {
-        cityArray.append(city)
-        saveToPersistantStorage()
     }
     
     func filePath(key: String) -> String {

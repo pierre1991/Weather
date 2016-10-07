@@ -11,6 +11,8 @@ import CoreLocation
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
+    
+    
     //MARK: Properties
     var city: City?
     
@@ -44,16 +46,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         
         searchField.keyboardAppearance = .dark
         
-        
-        if (CLLocationManager.locationServicesEnabled()) {
-            locationManager.delegate = self
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            
-            print(locationLat)
-            print(locationLong)
-        }
-	}
+        locationLat = (locationManager.location?.coordinate.latitude)!	
+        locationLong = (locationManager.location?.coordinate.longitude)!
+    }
     
     
     //MARK: Touches
@@ -73,6 +68,52 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     //MARK: IBActions
+    @IBAction func locationButtonTapped(_ sender: AnyObject) {
+        if (CLLocationManager.locationServicesEnabled()) {
+            locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+            
+            print(locationLat)
+            print(locationLong)
+            
+            
+            WeatherController.getWeatherForLocation(locationLat, long: locationLong, completion: { (result) in
+                guard let weatherResult = result else {return}
+                
+                print(weatherResult)
+                
+                self.city = weatherResult
+                
+                DispatchQueue.main.sync(execute: { 
+                    self.cityName.text = weatherResult.cityName
+                    
+                    if let temperatureC = weatherResult.temperatureC {
+                        self.temperatureLabel.text = String(temperatureC) + " C"
+                    }
+                    
+                    self.descriptionLabel.text = weatherResult.weatherDescription
+                    
+                    print(weatherResult.icon)
+                    
+                    self.moveSearchViews()
+                    
+                    UIView.animate(withDuration: 1.0, animations: {
+                        self.cityName.layer.transform = CATransform3DIdentity
+                        self.temperatureLabel.layer.transform = CATransform3DIdentity
+                        self.descriptionLabel.layer.transform = CATransform3DIdentity
+    
+                        self.addCityButton.layer.transform = CATransform3DIdentity
+                    })
+                })
+            })
+            
+        }
+    }
+    
+    
+    
     @IBAction func searchBarButtonTapped(_ sender: AnyObject) {
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4, options: .curveEaseOut, animations: { 
                     self.initialLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
@@ -89,6 +130,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             WeatherController.getWeatherForCity(text, completion: { (result) in
                 guard let weatherResult = result else {return}
                 
+                print(weatherResult)
+                
                 self.city = weatherResult
                 
     			DispatchQueue.main.async(execute: {
@@ -98,12 +141,11 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                         self.temperatureLabel.text = String(temperatureC) + " C"
                     }
                     
-                    self.descriptionLabel.text = weatherResult.description
+                    self.descriptionLabel.text = weatherResult.weatherDescription
                     
+                	print(weatherResult.icon)
                     
-                    self.weatherLogo.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
-                    self.searchField.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
-                    self.searchButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
+                    self.moveSearchViews()
                     
                     UIView.animate(withDuration: 1.0, animations: { 
                         self.cityName.layer.transform = CATransform3DIdentity
@@ -137,7 +179,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
-    //Removes Weather search views and search views off screen
+    //Removes Weather search views and search views off view
     func setupOffscreenViews() {
         cityName.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
         temperatureLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
@@ -150,9 +192,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    
-    
-    
     //Moves searchField and searchButton onto the view
     func setupOnscreenViews() {
         UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: { 
@@ -162,6 +201,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: {
             self.searchButton.layer.transform = CATransform3DIdentity
             }, completion: nil)
+    }
+    
+    //Move searchField, searchButton, weatherLogo off view
+    func moveSearchViews() {
+        UIView.animate(withDuration: 0.4) { 
+            self.weatherLogo.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
+            self.searchField.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
+            self.searchButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
+        }
     }
     
     

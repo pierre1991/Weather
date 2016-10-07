@@ -15,11 +15,18 @@ class NetworkController {
     static let baseUrl = "http://api.openweathermap.org/data/2.5/weather"
     
     
+    
+    
     static func searchWeatherByCity(_ city: String) -> URL {
         let escapedString = city.addingPercentEncoding(withAllowedCharacters: CharacterSet())
         
         return URL(string: baseUrl + "?q=\(escapedString!)" + "&appid=\(API_KEY)")!
     }
+    
+    static func searchWeatherByLocation(_ lat: Double, lon: Double) -> URL {
+        return URL(string: baseUrl + "?lat=\(lat)&lon=\(lon)" + "&appid=\(API_KEY)")!
+    }
+    
     
     
     static func dataAtUrl(_ url: URL, completion:@escaping (_ resultData: Data?) -> Void) {
