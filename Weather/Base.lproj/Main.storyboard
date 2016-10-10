@@ -43,11 +43,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2T-4r-MQ7">
-                                <fontDescription key="fontDescription" type="system" pointSize="62"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SEy-Lt-U8s"/>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcw-7V-s9b">
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -69,6 +64,11 @@
                                     <segue destination="xdX-bP-2qW" kind="presentation" identifier="toCityView" id="WbA-8A-KgD"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2T-4r-MQ7">
+                                <fontDescription key="fontDescription" type="system" pointSize="62"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.066666666666666666" green="0.14117647058823529" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -86,7 +86,7 @@
                             <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="Fcw-7V-s9b" secondAttribute="bottom" constant="91" id="H7X-6E-J0i"/>
                             <constraint firstItem="Fcw-7V-s9b" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="74" id="KYY-MG-GNm"/>
                             <constraint firstItem="uY2-lQ-s1M" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="107" id="LAO-Ws-dRz"/>
-                            <constraint firstAttribute="trailing" secondItem="o2T-4r-MQ7" secondAttribute="trailing" constant="111" id="Q2a-Fn-OLN"/>
+                            <constraint firstAttribute="trailing" secondItem="o2T-4r-MQ7" secondAttribute="trailing" constant="67" id="Q2a-Fn-OLN"/>
                             <constraint firstItem="9S9-CO-9VG" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="8" id="SHo-3F-Afh"/>
                             <constraint firstItem="uQY-hf-ZzD" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="31" id="WKh-wM-kIF"/>
                             <constraint firstItem="SEy-Lt-U8s" firstAttribute="top" secondItem="o2T-4r-MQ7" secondAttribute="bottom" constant="20" id="Xkg-Zh-3hH"/>
@@ -97,7 +97,7 @@
                             <constraint firstItem="tXz-zG-GBy" firstAttribute="top" secondItem="8eO-YU-m66" secondAttribute="bottom" constant="53" id="ckJ-Qc-rz4"/>
                             <constraint firstAttribute="trailing" secondItem="zgQ-BD-eag" secondAttribute="trailing" constant="8" id="e8X-DO-KBd"/>
                             <constraint firstAttribute="trailing" secondItem="uY2-lQ-s1M" secondAttribute="trailing" constant="107" id="eU1-Mk-FZb"/>
-                            <constraint firstItem="o2T-4r-MQ7" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="96" id="ewG-Lx-zDQ"/>
+                            <constraint firstItem="o2T-4r-MQ7" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="67" id="ewG-Lx-zDQ"/>
                             <constraint firstItem="tXz-zG-GBy" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="31" id="fLV-M8-cJK"/>
                             <constraint firstAttribute="trailing" secondItem="9S9-CO-9VG" secondAttribute="trailing" constant="8" id="gDV-ud-xfD"/>
                             <constraint firstAttribute="trailing" secondItem="uQY-hf-ZzD" secondAttribute="trailing" constant="31" id="geF-Lj-EWX"/>
@@ -128,6 +128,7 @@
                         <outlet property="searchButton" destination="uY2-lQ-s1M" id="x1p-oH-77I"/>
                         <outlet property="searchField" destination="uQY-hf-ZzD" id="hQL-Lh-RtQ"/>
                         <outlet property="temperatureLabel" destination="o2T-4r-MQ7" id="03h-6e-76k"/>
+                        <outlet property="weatherIcon" destination="SEy-Lt-U8s" id="rMM-ru-7vb"/>
                         <outlet property="weatherLogo" destination="8eO-YU-m66" id="g5k-sI-Mqq"/>
                     </connections>
                 </viewController>
@@ -178,25 +179,46 @@
                                     <outlet property="delegate" destination="xdX-bP-2qW" id="Rq7-N4-HEM"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5I-Ft-oPx" userLabel="NoCityView">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VL4-dz-VPF">
+                                        <frame key="frameInset" minX="40" minY="164" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="you don't have any saved cities to view the weather for..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7Y-qy-j4m">
+                                        <frame key="frameInset" minX="38" minY="300" width="244" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.066666666666666666" green="0.14117647058823529" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.19215686274509802" green="0.29411764705882354" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="i5I-Ft-oPx" secondAttribute="trailing" id="6tu-7b-kzZ"/>
                             <constraint firstItem="Afb-LJ-RbM" firstAttribute="top" secondItem="ttB-8x-cmm" secondAttribute="bottom" id="GjQ-2Z-ofa"/>
+                            <constraint firstItem="i5I-Ft-oPx" firstAttribute="top" secondItem="ttB-8x-cmm" secondAttribute="bottom" id="K4d-Qy-Fbz"/>
                             <constraint firstAttribute="trailing" secondItem="Afb-LJ-RbM" secondAttribute="trailing" id="MYW-2j-1Gv"/>
                             <constraint firstItem="Afb-LJ-RbM" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="O3E-9h-VJh"/>
+                            <constraint firstItem="i5I-Ft-oPx" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="W5p-lV-bD7"/>
                             <constraint firstItem="qgz-26-2mD" firstAttribute="top" secondItem="Afb-LJ-RbM" secondAttribute="bottom" id="WdS-oa-n08"/>
                             <constraint firstItem="ttB-8x-cmm" firstAttribute="top" secondItem="Bi1-rX-QQj" secondAttribute="bottom" id="eEz-2W-KqW"/>
                             <constraint firstAttribute="trailing" secondItem="ttB-8x-cmm" secondAttribute="trailing" id="ngK-th-eog"/>
+                            <constraint firstItem="qgz-26-2mD" firstAttribute="top" secondItem="i5I-Ft-oPx" secondAttribute="bottom" id="piZ-2G-HrC"/>
                             <constraint firstItem="ttB-8x-cmm" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="vih-pl-25M"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="noCityView" destination="i5I-Ft-oPx" id="tBl-Xd-W1D"/>
                         <outlet property="tableView" destination="Afb-LJ-RbM" id="1x9-xG-4Ny"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a35-Cm-mfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-294" y="-221"/>
+            <point key="canvasLocation" x="-294.375" y="-221.83098591549296"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sxc-9r-U8N">
