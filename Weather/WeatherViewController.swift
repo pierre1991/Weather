@@ -12,7 +12,6 @@ import CoreLocation
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
     
-    
     //MARK: Properties
     var city: City?
     
@@ -20,6 +19,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     var locationLat: Double = 0
     var locationLong: Double = 0
     
+    var keyboardHeight: CGFloat!
     
     
     //MARK: IBOutlets
@@ -45,13 +45,24 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         
         setupOffscreenViews()
         
-        locationWeather()
+        //locationWeather()
         
         searchField.keyboardAppearance = .dark
         
-        //locationLat = (locationManager.location?.coordinate.latitude)!
-        //locationLong = (locationManager.location?.coordinate.longitude)!
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        locationLat = (locationManager.location?.coordinate.latitude)!
+        locationLong = (locationManager.location?.coordinate.longitude)!
     }
+    
+    
+    //MARK: Status Bar
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
     
     
     //MARK: Touches
@@ -73,6 +84,18 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     //MARK: IBActions
     @IBAction func locationButtonTapped(_ sender: AnyObject) {
         locationWeather()
+        
+        moveLogoView()
+        moveSearchViews()
+        
+        UIView.animate(withDuration: 1.0, animations: {
+            self.cityName.layer.transform = CATransform3DIdentity
+            self.temperatureLabel.layer.transform = CATransform3DIdentity
+            self.weatherIcon.layer.transform = CATransform3DIdentity
+            self.descriptionLabel.layer.transform = CATransform3DIdentity
+            
+            self.addCityButton.layer.transform = CATransform3DIdentity
+        })
     }
     
     
@@ -92,9 +115,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                     self.cityName.text = weatherResult.cityName
                     
                     if let temperatureF = weatherResult.temperatureF {
-                        let formattedTemp = String(format: "%.1f", temperatureF)
+                        let formattedTemp = String(format: "%.0f", temperatureF)
                         
-                        self.temperatureLabel.text = String("\(formattedTemp) °")
+                        self.temperatureLabel.text = String("\(formattedTemp)°")
                     }
                     
                     if let weatherIcon = weatherResult.icon {
@@ -102,16 +125,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                     }
                     
                     self.descriptionLabel.text = weatherResult.weatherDescription
-                    
-                    self.moveSearchViews()
-                    
-                    UIView.animate(withDuration: 1.0, animations: {
-                        self.cityName.layer.transform = CATransform3DIdentity
-                        self.temperatureLabel.layer.transform = CATransform3DIdentity
-                        self.descriptionLabel.layer.transform = CATransform3DIdentity
-                        
-                        self.addCityButton.layer.transform = CATransform3DIdentity
-                    })
                 })
             })
         }
@@ -120,12 +133,16 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func searchBarButtonTapped(_ sender: AnyObject) {
+        moveLocationViews()
+        
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4, options: .curveEaseOut, animations: {
                     self.initialLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
             }, completion: nil)
+        
+        UIView.animate(withDuration: 0.8, animations: {
+            self.addCityButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, +self.view.frame.height, 0)
+            }, completion: nil)
 
-        
-        
         setupOnscreenViews()
     }
 
@@ -133,7 +150,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func searchButtonTapped(_ sender: AnyObject) {
-		if let text = searchField.text {
+        if let text = searchField.text {
             WeatherController.getWeatherForCity(text, completion: { (result) in
                 guard let weatherResult = result else {return}
             
@@ -143,9 +160,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                     self.cityName.text = weatherResult.cityName
                     
                     if let temperatureF = weatherResult.temperatureF {
-                        let formattedTemp = String(format: "%.1f", temperatureF)
-                        
-                        self.temperatureLabel.text = String("\(formattedTemp) °")
+                        let formattedTemp = String(format: "%.0f", temperatureF)
+                        self.temperatureLabel.text = String("\(formattedTemp)°")
                     }
                     
                     if let weatherIcon = weatherResult.icon {
@@ -160,6 +176,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                     UIView.animate(withDuration: 1.0, animations: { 
                         self.cityName.layer.transform = CATransform3DIdentity
                         self.temperatureLabel.layer.transform = CATransform3DIdentity
+                        self.weatherIcon.layer.transform = CATransform3DIdentity
                         self.descriptionLabel.layer.transform = CATransform3DIdentity
                         
                         self.addCityButton.layer.transform = CATransform3DIdentity
@@ -171,9 +188,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func cityListButtonTapped(_ sender: AnyObject) {
-        if let cityListViewContorller = UIStoryboard(name: "main", bundle: nil).instantiateViewController(withIdentifier: "CityListViewController") as? CityListViewController {
-            present(cityListViewContorller, animated: true, completion: nil)
-        }
+//        if let cityListViewContorller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CityListViewController") as? CityListViewController {
+//            present(cityListViewContorller, animated: true, completion: nil)
+//        }
     }
     
     
@@ -190,6 +207,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     func setupOffscreenViews() {
         cityName.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
         temperatureLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
+        weatherIcon.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
         descriptionLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
         
         searchField.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
@@ -211,13 +229,52 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     //Move searchField, searchButton, weatherLogo off view
+    func moveLogoView() {
+        self.weatherLogo.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
+        self.initialLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
+    }
+    
     func moveSearchViews() {
-        UIView.animate(withDuration: 0.4) { 
-            self.weatherLogo.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
+        UIView.animate(withDuration: 0.4) {
             self.searchField.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
             self.searchButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
         }
     }
     
+    func moveLocationViews() {
+        cityName.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
+        temperatureLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
+        weatherIcon.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
+        descriptionLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
+    }
+    
+    
+    
+    func keyboardNotification(_ notification: Notification) {
+        let info: NSDictionary = (notification as NSNotification).userInfo! as NSDictionary
+        let value: NSValue = info.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardFrame: CGRect = value.cgRectValue
+        let cgFloatKeyboardHeight: CGFloat = keyboardFrame.size.height
+        self.keyboardHeight = cgFloatKeyboardHeight
+        
+        let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+        
+        
+        if isKeyboardShowing {
+            UIView.animate(withDuration: 2.0, animations: {
+                self.weatherLogo.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, -self.view.frame.height, 0)
+                
+                self.searchField.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, -((UIScreen.main.bounds.height - self.keyboardHeight) / 2) - (self.searchField.frame.height), 0)
+                self.searchButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, -((UIScreen.main.bounds.height - self.keyboardHeight) / 2) - (self.searchButton.frame.height), 0)
+                
+            })
+        } else {
+            UIView.animate(withDuration: 2.0, animations: { 
+                self.weatherLogo.layer.transform = CATransform3DIdentity
+                self.searchField.layer.transform = CATransform3DIdentity
+                self.searchButton.layer.transform = CATransform3DIdentity
+            })
+        }
+    }
     
 }
