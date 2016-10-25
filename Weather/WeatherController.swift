@@ -15,7 +15,7 @@ class WeatherController {
     
     
     //MARK: Properties
-    var cityArray: [City] 
+    var cityArray: [City]
     
     
     init() {
@@ -85,6 +85,7 @@ class WeatherController {
     //MARK: Helper Functions
     func addCity(city: City) {
         cityArray.append(city)
+        //cityArray.append(city)
         saveToPersistantStorage()
     }
     
@@ -97,6 +98,7 @@ class WeatherController {
     
     func loadFromPersistantStorage() {
         guard let unarchivedCities = NSKeyedUnarchiver.unarchiveObject(withFile: self.filePath(key: kCity)) else {return}
+        
         self.cityArray = unarchivedCities as! [City]
     }
     

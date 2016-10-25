@@ -13,7 +13,6 @@ class CityListViewController: UIViewController {
 
     //MARK: IBOutlets
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var noCityView: UIView!
     
     
@@ -25,12 +24,14 @@ class CityListViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     
     
     //MARK: IBActions
-    @IBAction func dismissViewButtonTapped(_ sender: AnyObject) {
-        dismiss(animated: true, completion: nil)
-    }
+
 }
 
 extension CityListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -46,11 +47,10 @@ extension CityListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! CityTableViewCell
         let city = WeatherController.sharedController.cityArray[indexPath.row]
         
-        cell.textLabel?.text = city.cityName
-        cell.textLabel?.textColor = .white
+        cell.update(city: city)
         
         return cell
     }

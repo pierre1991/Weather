@@ -13,7 +13,10 @@ class AppearanceController {
     
     static func initializeAppearance() {
     	UINavigationBar.appearance().barTintColor = UIColor.mediumDarkBlue()
-        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().barStyle = .black
+        UINavigationBar.appearance().tintColor = .white
+        
+        
     }
     
 //    static func setStatusBarBackgroundColor(_ color: UIColor) {
