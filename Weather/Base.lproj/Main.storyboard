@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,9 +20,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="weather_logo" translatesAutoresizingMaskIntoConstraints="NO" id="8eO-YU-m66"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="weather_logo" translatesAutoresizingMaskIntoConstraints="NO" id="8eO-YU-m66"/>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="add a location or use your current location for weather" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXz-zG-GBy">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -45,11 +47,14 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SEy-Lt-U8s"/>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcw-7V-s9b">
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgQ-BD-eag">
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="zgQ-BD-eag" secondAttribute="height" multiplier="1:1" id="dfK-rY-LtE"/>
+                                </constraints>
                                 <state key="normal" image="add_button">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -58,52 +63,54 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgX-Qz-agS">
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="tgX-Qz-agS" secondAttribute="height" multiplier="1:1" id="NW0-Ar-bSP"/>
+                                </constraints>
                                 <state key="normal" image="navigattion_button"/>
                                 <connections>
                                     <action selector="cityListButtonTapped:" destination="Y5w-2e-r1g" eventType="touchUpInside" id="rLU-cz-KcX"/>
-                                    <segue destination="xdX-bP-2qW" kind="presentation" identifier="toCityView" id="WbA-8A-KgD"/>
+                                    <segue destination="xdX-bP-2qW" kind="show" id="cuq-pd-XDJ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2T-4r-MQ7">
-                                <fontDescription key="fontDescription" type="system" pointSize="62"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="66"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.066666666666666666" green="0.14117647058823529" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="tgX-Qz-agS" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="464" id="10e-nM-kr7"/>
-                            <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="zgQ-BD-eag" secondAttribute="bottom" constant="8" id="1TT-Qb-KBH"/>
                             <constraint firstItem="SEy-Lt-U8s" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="40" id="1Tu-cH-ZXF"/>
                             <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="tXz-zG-GBy" secondAttribute="bottom" constant="154" id="1iR-tv-jST"/>
                             <constraint firstItem="uY2-lQ-s1M" firstAttribute="top" secondItem="uQY-hf-ZzD" secondAttribute="bottom" constant="14" id="2MB-nn-6Lf"/>
                             <constraint firstAttribute="trailing" secondItem="8eO-YU-m66" secondAttribute="trailing" constant="78" id="2bG-CT-yY6"/>
+                            <constraint firstItem="zgQ-BD-eag" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="458" id="2ro-k3-svi"/>
                             <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="uY2-lQ-s1M" secondAttribute="bottom" constant="116" id="6Gs-j6-LZJ"/>
                             <constraint firstItem="8eO-YU-m66" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="130" id="8Ra-s1-TL2"/>
-                            <constraint firstItem="Fcw-7V-s9b" firstAttribute="top" secondItem="SEy-Lt-U8s" secondAttribute="bottom" constant="14" id="9Y8-kc-qQi"/>
+                            <constraint firstItem="Fcw-7V-s9b" firstAttribute="top" secondItem="SEy-Lt-U8s" secondAttribute="bottom" constant="18" id="9Y8-kc-qQi"/>
                             <constraint firstAttribute="trailing" secondItem="tXz-zG-GBy" secondAttribute="trailing" constant="31" id="D69-ix-hOh"/>
-                            <constraint firstItem="tgX-Qz-agS" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="8" id="EZv-Gj-lgm"/>
-                            <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="Fcw-7V-s9b" secondAttribute="bottom" constant="91" id="H7X-6E-J0i"/>
+                            <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="Fcw-7V-s9b" secondAttribute="bottom" constant="93" id="H7X-6E-J0i"/>
                             <constraint firstItem="Fcw-7V-s9b" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="74" id="KYY-MG-GNm"/>
                             <constraint firstItem="uY2-lQ-s1M" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="107" id="LAO-Ws-dRz"/>
                             <constraint firstAttribute="trailing" secondItem="o2T-4r-MQ7" secondAttribute="trailing" constant="67" id="Q2a-Fn-OLN"/>
                             <constraint firstItem="9S9-CO-9VG" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="8" id="SHo-3F-Afh"/>
+                            <constraint firstItem="tgX-Qz-agS" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="456" id="UB7-7V-cpC"/>
                             <constraint firstItem="uQY-hf-ZzD" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="31" id="WKh-wM-kIF"/>
-                            <constraint firstItem="SEy-Lt-U8s" firstAttribute="top" secondItem="o2T-4r-MQ7" secondAttribute="bottom" constant="20" id="Xkg-Zh-3hH"/>
-                            <constraint firstItem="zgQ-BD-eag" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="464" id="XsM-vF-FIg"/>
+                            <constraint firstItem="SEy-Lt-U8s" firstAttribute="top" secondItem="o2T-4r-MQ7" secondAttribute="bottom" constant="18" id="Xkg-Zh-3hH"/>
                             <constraint firstItem="8eO-YU-m66" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="78" id="ZwK-4N-rTY"/>
                             <constraint firstAttribute="trailing" secondItem="Fcw-7V-s9b" secondAttribute="trailing" constant="74" id="anv-Ps-Uk5"/>
                             <constraint firstItem="o2T-4r-MQ7" firstAttribute="top" secondItem="9S9-CO-9VG" secondAttribute="bottom" constant="18" id="atv-fe-g9a"/>
                             <constraint firstItem="tXz-zG-GBy" firstAttribute="top" secondItem="8eO-YU-m66" secondAttribute="bottom" constant="53" id="ckJ-Qc-rz4"/>
-                            <constraint firstAttribute="trailing" secondItem="zgQ-BD-eag" secondAttribute="trailing" constant="8" id="e8X-DO-KBd"/>
                             <constraint firstAttribute="trailing" secondItem="uY2-lQ-s1M" secondAttribute="trailing" constant="107" id="eU1-Mk-FZb"/>
                             <constraint firstItem="o2T-4r-MQ7" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="67" id="ewG-Lx-zDQ"/>
                             <constraint firstItem="tXz-zG-GBy" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="31" id="fLV-M8-cJK"/>
                             <constraint firstAttribute="trailing" secondItem="9S9-CO-9VG" secondAttribute="trailing" constant="8" id="gDV-ud-xfD"/>
                             <constraint firstAttribute="trailing" secondItem="uQY-hf-ZzD" secondAttribute="trailing" constant="31" id="geF-Lj-EWX"/>
-                            <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="tgX-Qz-agS" secondAttribute="bottom" constant="10" id="irR-pU-qjT"/>
-                            <constraint firstItem="9S9-CO-9VG" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="38" id="oFH-Cc-Tct"/>
-                            <constraint firstItem="zgQ-BD-eag" firstAttribute="top" secondItem="tgX-Qz-agS" secondAttribute="bottom" constant="-30" id="uRQ-tO-oVK"/>
+                            <constraint firstItem="9S9-CO-9VG" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="34" id="oFH-Cc-Tct"/>
+                            <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="tgX-Qz-agS" secondAttribute="bottom" id="oWc-kp-Tiu"/>
+                            <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="zgQ-BD-eag" secondAttribute="bottom" id="ptz-Lf-8e9"/>
+                            <constraint firstAttribute="trailing" secondItem="zgQ-BD-eag" secondAttribute="trailing" id="sAP-vB-pN9"/>
+                            <constraint firstItem="tgX-Qz-agS" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" id="tT1-Pg-f68"/>
                             <constraint firstAttribute="trailing" secondItem="SEy-Lt-U8s" secondAttribute="trailing" constant="40" id="uUX-jE-BkV"/>
                             <constraint firstItem="uQY-hf-ZzD" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="314" id="vLq-G4-Vd3"/>
                         </constraints>
@@ -139,39 +146,53 @@
         <!--City List View Controller-->
         <scene sceneID="IoA-xM-uxS">
             <objects>
-                <viewController id="xdX-bP-2qW" customClass="CityListViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CityListViewController" id="xdX-bP-2qW" customClass="CityListViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bi1-rX-QQj"/>
                         <viewControllerLayoutGuide type="bottom" id="qgz-26-2mD"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="xTg-UP-PJw">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="xTg-UP-PJw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttB-8x-cmm">
-                                <items>
-                                    <navigationItem title="Cities" id="5Xw-y7-gTV">
-                                        <barButtonItem key="rightBarButtonItem" title="X" id="cRN-g1-HXm">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="dismissViewButtonTapped:" destination="xdX-bP-2qW" id="26k-oN-7zG"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Afb-LJ-RbM">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="46" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Afb-LJ-RbM">
                                 <color key="backgroundColor" red="0.065041117369999998" green="0.14210659270000001" blue="0.30339676139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cityCell" rowHeight="72" id="0Ug-cf-58y">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="72"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cityCell" rowHeight="46" id="0Ug-cf-58y" customClass="CityTableViewCell" customModule="Weather" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Ug-cf-58y" id="xfw-pX-qq3">
-                                            <frame key="frameInset" width="320" height="71"/>
+                                            <frame key="frameInset" width="320" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfe-dv-jfd">
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="21"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2B-Vu-Eu3">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="3Z2-Gg-bNr"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="B2B-Vu-Eu3" firstAttribute="trailing" secondItem="xfw-pX-qq3" secondAttribute="trailingMargin" id="1Ux-ag-bbT"/>
+                                                <constraint firstItem="dfe-dv-jfd" firstAttribute="leading" secondItem="xfw-pX-qq3" secondAttribute="leadingMargin" id="Dfn-CC-jVr"/>
+                                                <constraint firstItem="dfe-dv-jfd" firstAttribute="top" secondItem="xfw-pX-qq3" secondAttribute="topMargin" id="koq-A4-AAj"/>
+                                                <constraint firstItem="B2B-Vu-Eu3" firstAttribute="leading" secondItem="dfe-dv-jfd" secondAttribute="trailing" constant="32" id="obq-qD-hns"/>
+                                                <constraint firstItem="dfe-dv-jfd" firstAttribute="top" secondItem="B2B-Vu-Eu3" secondAttribute="top" id="y4H-8l-XVd"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.065041117369999998" green="0.14210659270000001" blue="0.30339676139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="cityLabel" destination="dfe-dv-jfd" id="fVl-Lf-Qjn"/>
+                                            <outlet property="cityTemperatureLabel" destination="B2B-Vu-Eu3" id="H5D-f6-0CS"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -181,35 +202,44 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5I-Ft-oPx" userLabel="NoCityView">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VL4-dz-VPF">
-                                        <frame key="frameInset" minX="40" minY="164" width="240" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="you don't have any saved cities to view the weather for..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7Y-qy-j4m">
-                                        <frame key="frameInset" minX="38" minY="300" width="244" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weather_logo" translatesAutoresizingMaskIntoConstraints="NO" id="VL4-dz-VPF"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="you don't have any saved cities to view the weather for..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7Y-qy-j4m">
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.066666666666666666" green="0.14117647058823529" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="VL4-dz-VPF" firstAttribute="top" secondItem="i5I-Ft-oPx" secondAttribute="top" constant="130" id="1dV-s5-fCq"/>
+                                    <constraint firstAttribute="trailing" secondItem="VL4-dz-VPF" secondAttribute="trailing" constant="78" id="6IY-O3-tjp"/>
+                                    <constraint firstItem="VL4-dz-VPF" firstAttribute="leading" secondItem="i5I-Ft-oPx" secondAttribute="leading" constant="78" id="8f5-Gi-eNV"/>
+                                    <constraint firstAttribute="trailing" secondItem="E7Y-qy-j4m" secondAttribute="trailing" constant="31" id="FjO-qc-seE"/>
+                                    <constraint firstItem="E7Y-qy-j4m" firstAttribute="leading" secondItem="i5I-Ft-oPx" secondAttribute="leading" constant="31" id="TDz-1j-pwt"/>
+                                    <constraint firstAttribute="bottom" secondItem="E7Y-qy-j4m" secondAttribute="bottom" constant="198" id="lcw-49-3qU"/>
+                                    <constraint firstItem="E7Y-qy-j4m" firstAttribute="top" secondItem="VL4-dz-VPF" secondAttribute="bottom" constant="53" id="oTQ-HA-nXV"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.19215686274509802" green="0.29411764705882354" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="i5I-Ft-oPx" secondAttribute="trailing" id="6tu-7b-kzZ"/>
-                            <constraint firstItem="Afb-LJ-RbM" firstAttribute="top" secondItem="ttB-8x-cmm" secondAttribute="bottom" id="GjQ-2Z-ofa"/>
-                            <constraint firstItem="i5I-Ft-oPx" firstAttribute="top" secondItem="ttB-8x-cmm" secondAttribute="bottom" id="K4d-Qy-Fbz"/>
-                            <constraint firstAttribute="trailing" secondItem="Afb-LJ-RbM" secondAttribute="trailing" id="MYW-2j-1Gv"/>
-                            <constraint firstItem="Afb-LJ-RbM" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="O3E-9h-VJh"/>
-                            <constraint firstItem="i5I-Ft-oPx" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="W5p-lV-bD7"/>
-                            <constraint firstItem="qgz-26-2mD" firstAttribute="top" secondItem="Afb-LJ-RbM" secondAttribute="bottom" id="WdS-oa-n08"/>
-                            <constraint firstItem="ttB-8x-cmm" firstAttribute="top" secondItem="Bi1-rX-QQj" secondAttribute="bottom" id="eEz-2W-KqW"/>
-                            <constraint firstAttribute="trailing" secondItem="ttB-8x-cmm" secondAttribute="trailing" id="ngK-th-eog"/>
-                            <constraint firstItem="qgz-26-2mD" firstAttribute="top" secondItem="i5I-Ft-oPx" secondAttribute="bottom" id="piZ-2G-HrC"/>
-                            <constraint firstItem="ttB-8x-cmm" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="vih-pl-25M"/>
+                            <constraint firstItem="i5I-Ft-oPx" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="6hU-MK-qaM"/>
+                            <constraint firstAttribute="trailing" secondItem="i5I-Ft-oPx" secondAttribute="trailing" id="CIN-CZ-niK"/>
+                            <constraint firstItem="qgz-26-2mD" firstAttribute="top" secondItem="Afb-LJ-RbM" secondAttribute="bottom" id="EQW-B2-EcL"/>
+                            <constraint firstItem="qgz-26-2mD" firstAttribute="top" secondItem="i5I-Ft-oPx" secondAttribute="bottom" id="IEZ-R2-4ah"/>
+                            <constraint firstItem="i5I-Ft-oPx" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="Mgc-Zx-v1G"/>
+                            <constraint firstItem="qgz-26-2mD" firstAttribute="top" secondItem="i5I-Ft-oPx" secondAttribute="bottom" id="Qc9-WZ-4iQ"/>
+                            <constraint firstItem="Afb-LJ-RbM" firstAttribute="leading" secondItem="xTg-UP-PJw" secondAttribute="leading" id="d0I-Cj-8sq"/>
+                            <constraint firstItem="i5I-Ft-oPx" firstAttribute="top" secondItem="Bi1-rX-QQj" secondAttribute="bottom" id="dD9-vX-IAw"/>
+                            <constraint firstAttribute="trailing" secondItem="i5I-Ft-oPx" secondAttribute="trailing" id="eGZ-J7-UWP"/>
+                            <constraint firstItem="Afb-LJ-RbM" firstAttribute="top" secondItem="xTg-UP-PJw" secondAttribute="top" id="rze-Cu-Py7"/>
+                            <constraint firstAttribute="trailing" secondItem="Afb-LJ-RbM" secondAttribute="trailing" id="zvK-1J-V9V"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="i5I-Ft-oPx"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="noCityView" destination="i5I-Ft-oPx" id="tBl-Xd-W1D"/>
@@ -218,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a35-Cm-mfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-294.375" y="-221.83098591549296"/>
+            <point key="canvasLocation" x="498.75" y="430.98591549295776"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sxc-9r-U8N">
@@ -244,6 +274,6 @@
         <image name="annotation_button" width="23" height="30"/>
         <image name="navigattion_button" width="30" height="25"/>
         <image name="search_button" width="22" height="29"/>
-        <image name="weather_logo" width="85" height="63"/>
+        <image name="weather_logo" width="170" height="127"/>
     </resources>
 </document>
