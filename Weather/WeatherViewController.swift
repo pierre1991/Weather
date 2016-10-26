@@ -45,8 +45,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         
         setupOffscreenViews()
         
-        //locationWeather()
-        
         searchField.keyboardAppearance = .dark
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -54,8 +52,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        locationLat = (locationManager.location?.coordinate.latitude)!
-        locationLong = (locationManager.location?.coordinate.longitude)!
+        //locationLat = (locationManager.location?.coordinate.latitude)!
+        //locationLong = (locationManager.location?.coordinate.longitude)!
     }
     
     
