@@ -16,11 +16,11 @@ class WeatherIcon {
         case "01d":
             return UIImage(named: "clear_sky")!
         case "01n":
-            return UIImage(named: "clear_sky_night")!
+            return UIImage(named: "clear_sky_n")!
         case "02d":
             return UIImage(named: "few_clouds")!
         case "02n":
-            return UIImage(named: "few_clouds_night")!
+            return UIImage(named: "few_clouds_n")!
         case "03d":
             return UIImage(named: "scattered_clouds")!
         case "03n":
