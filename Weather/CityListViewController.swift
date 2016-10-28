@@ -27,15 +27,18 @@ class CityListViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-    
-    
-    
 
 }
+
 
 extension CityListViewController: UITableViewDataSource, UITableViewDelegate {
     
