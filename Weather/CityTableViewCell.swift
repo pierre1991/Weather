@@ -61,21 +61,41 @@ class CityTableViewCell: UITableViewCell {
             guard let cityInfo = cityInfo else {return}
             
             DispatchQueue.main.async {
-                guard let cityTemperature = cityInfo.temperatureF, let sunrise = cityInfo.sunrise, let sunset = cityInfo.sunset, let humidity = cityInfo.humidity, let pressure = cityInfo.pressure, let description = cityInfo.weatherDescription, let weatherIcon = cityInfo.icon else {return}
+                guard let cityTemperature = cityInfo.temperatureF, let sunrise = cityInfo.sunrise, let sunset = cityInfo.sunset, let humidity = cityInfo.humidity, let pressure = cityInfo.convertedPressure, let description = cityInfo.weatherDescription, let weatherIcon = cityInfo.icon else {return}
                 
-                self.cityTemperatureLabel.text = "\(cityTemperature)"
+                let formattedTemp = String(format: "%0.f", cityTemperature)
+                
+                self.cityTemperatureLabel.text = "\(formattedTemp)°F"
                 self.weatherIconView.image = WeatherIcon.getWeatherIcon(icon: weatherIcon)
-                self.sunriseLabel.text = "\(sunrise)"
-                self.sunsetLabel.text = "\(sunset)"
-                self.humidityLabel.text = "\(humidity)"
-                self.pressureLabel.text = "\(pressure)"
+
+                let dateSunrise = self.timeStringFromUnixTime(unixTime: sunrise)
+                let dateSunset = self.timeStringFromUnixTime(unixTime: sunset)
+
+                
+                self.sunriseLabel.text = "\(dateSunrise)"
+                self.sunsetLabel.text = "\(dateSunset)"
+                
+                let formattedHumidity = String(format: "%0.f", humidity)
+                self.humidityLabel.text = "\(formattedHumidity)%"
+                
+                let formattedPressure = String(format: "%0.f", pressure)
+                self.pressureLabel.text = "\(formattedPressure) inHg"
+                
                 self.descriptionLabel.text = "\(description)"
             }
         }
     }
 
     
-    
+    //MARK: Helper Function
+    func timeStringFromUnixTime(unixTime: Double) -> String {
+        let date = NSDate(timeIntervalSince1970: unixTime)
+        
+    	let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        return dateFormatter.string(from: date as Date)
+    }
 
-    
+
 }
