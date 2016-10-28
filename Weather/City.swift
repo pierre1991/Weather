@@ -34,13 +34,20 @@ class City: NSObject, NSCoding {
     var weatherDescription: String?
     var icon: String?
     var temperatureK: Double?
-    var humidity: Double?
     var speed: Double?
     var cityName: String?
     var sunrise: Double?
     var sunset: Double?
+    
     var pressure: Float?
+    var convertedPressure: Float? {
+        guard let pressure = pressure else {return nil}
+        return Float((pressure * 0.0002953) * (100))
+    }
+    
     var id: Double?
+    
+    var humidity: Double?
     
     var temperatureC: Double? {
         get {
