@@ -22,6 +22,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     var keyboardHeight: CGFloat!
     
     
+    
     //MARK: IBOutlets
     @IBOutlet weak var weatherLogo: UIImageView!
     @IBOutlet weak var initialLabel: UILabel!
@@ -44,8 +45,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         
         setupOffscreenViews()
-        
-        //locationWeather()
+        //setupSearchFields()
         
         searchField.keyboardAppearance = .dark
         
@@ -54,15 +54,26 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        locationLat = (locationManager.location?.coordinate.latitude)!
-        locationLong = (locationManager.location?.coordinate.longitude)!
+        if locationManager.location != nil {
+            locationLat = (locationManager.location?.coordinate.latitude)!
+            locationLong = (locationManager.location?.coordinate.longitude)!
+            
+            moveLogoView()
+            
+            getAndUpdateWeatherForLocation()
+            
+            UIView.animate(withDuration: 1.0, animations: {
+                self.cityName.layer.transform = CATransform3DIdentity
+                self.temperatureLabel.layer.transform = CATransform3DIdentity
+                self.weatherIcon.layer.transform = CATransform3DIdentity
+                self.descriptionLabel.layer.transform = CATransform3DIdentity
+                
+                self.addCityButton.layer.transform = CATransform3DIdentity
+            })
+            
+        }
     }
-    
-    
-    //MARK: Status Bar
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
+
     
     
     //MARK: Touches
@@ -72,6 +83,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
+    //MARK: Location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locationValue: CLLocationCoordinate2D = (manager.location?.coordinate)!
         locationLat = locationValue.latitude
@@ -83,7 +95,27 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     //MARK: IBActions
     @IBAction func locationButtonTapped(_ sender: AnyObject) {
-        locationWeather()
+        searchField.resignFirstResponder()
+        
+        if (CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == .authorizedWhenInUse) {
+            locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+            
+            locationLat = (locationManager.location?.coordinate.latitude)!
+            locationLong = (locationManager.location?.coordinate.longitude)!
+            
+            getAndUpdateWeatherForLocation()
+        } else {
+            locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+            
+            getAndUpdateWeatherForLocation()
+        }
+        
         
         moveLogoView()
         moveSearchViews()
@@ -97,43 +129,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             self.addCityButton.layer.transform = CATransform3DIdentity
         })
     }
-    
-    
-    func locationWeather() {
-        if (CLLocationManager.locationServicesEnabled()) {
-            locationManager.delegate = self
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-            
-            WeatherController.getWeatherForLocation(locationLat, long: locationLong, completion: { (result) in
-                guard let weatherResult = result else {return}
-                
-                self.city = weatherResult
-                
-                DispatchQueue.main.sync(execute: {
-                    self.cityName.text = weatherResult.cityName
-                    
-                    if let temperatureF = weatherResult.temperatureF {
-                        let formattedTemp = String(format: "%.0f", temperatureF)
-                        
-                        self.temperatureLabel.text = String("\(formattedTemp)°")
-                    }
-                    
-                    if let weatherIcon = weatherResult.icon {
-                        self.weatherIcon.image = WeatherIcon.getWeatherIcon(icon: weatherIcon)
-                    }
-                    
-                    self.descriptionLabel.text = weatherResult.weatherDescription
-                })
-            })
-        }
-    }
+
     
     
     
     @IBAction func searchBarButtonTapped(_ sender: AnyObject) {
         moveLocationViews()
+        
         
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4, options: .curveEaseOut, animations: {
                     self.initialLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
@@ -151,46 +153,62 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func searchButtonTapped(_ sender: AnyObject) {
         if let text = searchField.text {
-            WeatherController.getWeatherForCity(text, completion: { (result) in
-                guard let weatherResult = result else {return}
-            
-    			self.city = weatherResult
+            if text.characters.count > 0 {
+                searchField.resignFirstResponder()
                 
-    			DispatchQueue.main.async(execute: {
-                    self.cityName.text = weatherResult.cityName
+                WeatherController.getWeatherForCity(text, completion: { (result) in
+                    guard let weatherResult = result else {return}
+                
+                    self.city = weatherResult
                     
-                    if let temperatureF = weatherResult.temperatureF {
-                        let formattedTemp = String(format: "%.0f", temperatureF)
-                        self.temperatureLabel.text = String("\(formattedTemp)°")
-                    }
-                    
-                    if let weatherIcon = weatherResult.icon {
-                        self.weatherIcon.image = WeatherIcon.getWeatherIcon(icon: weatherIcon)
-                    }
-                    
-                    self.descriptionLabel.text = weatherResult.weatherDescription
-                    
-                	
-                    self.moveSearchViews()
-                    
-                    UIView.animate(withDuration: 1.0, animations: { 
-                        self.cityName.layer.transform = CATransform3DIdentity
-                        self.temperatureLabel.layer.transform = CATransform3DIdentity
-                        self.weatherIcon.layer.transform = CATransform3DIdentity
-                        self.descriptionLabel.layer.transform = CATransform3DIdentity
+                    DispatchQueue.main.async(execute: {
+                        self.cityName.text = weatherResult.cityName
                         
-                        self.addCityButton.layer.transform = CATransform3DIdentity
+                        if let temperatureF = weatherResult.temperatureF {
+                            let formattedTemp = String(format: "%.0f", temperatureF)
+                            self.temperatureLabel.text = String("\(formattedTemp)°")
+                        }
+                        
+                        if let weatherIcon = weatherResult.icon {
+                            self.weatherIcon.image = WeatherIcon.getWeatherIcon(icon: weatherIcon)
+                        }
+                        
+                        self.descriptionLabel.text = weatherResult.weatherDescription
+                        
+                        self.moveSearchViews()
+                        UIView.animate(withDuration: 0.4, animations: {
+                        	self.weatherLogo.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
+                        })
+                        
+                        
+                        UIView.animate(withDuration: 1.0, animations: { 
+                            self.cityName.layer.transform = CATransform3DIdentity
+                            self.temperatureLabel.layer.transform = CATransform3DIdentity
+                            self.weatherIcon.layer.transform = CATransform3DIdentity
+                            self.descriptionLabel.layer.transform = CATransform3DIdentity
+                            
+                            self.addCityButton.layer.transform = CATransform3DIdentity
+                        })
                     })
                 })
-            })
+            } else {
+                let animation = CABasicAnimation(keyPath: "position")
+                animation.duration = 0.07
+                animation.repeatCount = 4
+                animation.autoreverses = true
+                animation.fromValue = NSValue(cgPoint: CGPoint(x: searchField.center.x - 10, y: searchField.center.y))
+                animation.toValue = NSValue(cgPoint: CGPoint(x: searchField.center.x + 10, y: searchField.center.y))
+
+                searchField.layer.add(animation, forKey: "position")
+            }
+        } else {
+            print("no text")
         }
+        
     }
     
     
     @IBAction func cityListButtonTapped(_ sender: AnyObject) {
-//        if let cityListViewContorller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CityListViewController") as? CityListViewController {
-//            present(cityListViewContorller, animated: true, completion: nil)
-//        }
     }
     
     
@@ -199,9 +217,46 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         
         WeatherController.sharedController.addCity(city: city)
     }
-    
-    
 
+    
+    
+    //MARK: Builder Fucntions
+    func getAndUpdateWeatherForLocation() {
+        WeatherController.getWeatherForLocation(locationLat, long: locationLong, completion: { (result) in
+            guard let weatherResult = result else {return}
+            
+            self.city = weatherResult
+            
+            DispatchQueue.main.sync(execute: {
+                self.cityName.text = weatherResult.cityName
+                
+                if let temperatureF = weatherResult.temperatureF {
+                    let formattedTemp = String(format: "%.0f", temperatureF)
+                    
+                    self.temperatureLabel.text = String("\(formattedTemp)°F")
+                }
+                
+                if let weatherIcon = weatherResult.icon {
+                    self.weatherIcon.image = WeatherIcon.getWeatherIcon(icon: weatherIcon)
+                }
+                
+                self.descriptionLabel.text = weatherResult.weatherDescription
+            })
+        })
+    }
+    
+    
+	
+    //MARK: View Functions
+    func setupSearchFields() {
+        let color = UIColor.white
+        
+        searchField.layer.borderColor = color.cgColor
+        searchField.borderStyle = .line
+        searchField.backgroundColor = .mediumDarkBlue()
+    }
+    
+    
     
     //Removes Weather search views and search views off view
     func setupOffscreenViews() {
@@ -219,11 +274,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     //Moves searchField and searchButton onto the view
     func setupOnscreenViews() {
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: { 
+//        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: { 
+//            self.weatherIcon.layer.transform = CATransform3DIdentity
+//            }, completion: nil)
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: {
             self.searchField.layer.transform = CATransform3DIdentity
             }, completion: nil)
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: { 
             self.searchButton.layer.transform = CATransform3DIdentity
             }, completion: nil)
     }
@@ -250,6 +309,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
+    //MARK: Keyboard
     func keyboardNotification(_ notification: Notification) {
         let info: NSDictionary = (notification as NSNotification).userInfo! as NSDictionary
         let value: NSValue = info.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
@@ -258,7 +318,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         self.keyboardHeight = cgFloatKeyboardHeight
         
         let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
-        
         
         if isKeyboardShowing {
             UIView.animate(withDuration: 2.0, animations: {
@@ -278,3 +337,16 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
 }
+
+
+extension WeatherViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        searchField.text = ""
+    }
+
+    
+    
+
+}
+

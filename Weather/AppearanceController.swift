@@ -16,7 +16,10 @@ class AppearanceController {
         UINavigationBar.appearance().barStyle = .black
         UINavigationBar.appearance().tintColor = .white
         
-        
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont.systemFont(ofSize: 21.0, weight: UIFontWeightLight)
+        ]
     }
     
 //    static func setStatusBarBackgroundColor(_ color: UIColor) {

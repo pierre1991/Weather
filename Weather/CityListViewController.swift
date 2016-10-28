@@ -10,6 +10,9 @@ import UIKit
 
 class CityListViewController: UIViewController {
 
+    //MARK: Properties
+    var selectedIndexPath: NSIndexPath?
+    
 
     //MARK: IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -24,15 +27,18 @@ class CityListViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-    
-    
-    //MARK: IBActions
 
 }
+
 
 extension CityListViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -51,6 +57,7 @@ extension CityListViewController: UITableViewDataSource, UITableViewDelegate {
         let city = WeatherController.sharedController.cityArray[indexPath.row]
         
         cell.update(city: city)
+        cell.selectionStyle = .none
         
         return cell
     }
@@ -63,5 +70,21 @@ extension CityListViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedIndexPath = indexPath as NSIndexPath?
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (selectedIndexPath != nil) && (indexPath.row == selectedIndexPath?.row) {
+            return 219
+        }
+        return 46
+    }
+    
+    
     
 }

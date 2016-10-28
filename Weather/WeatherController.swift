@@ -78,14 +78,9 @@ class WeatherController {
         }
     }
     
-    
-    
-    
-    
-    //MARK: Helper Functions
+
     func addCity(city: City) {
         cityArray.append(city)
-        //cityArray.append(city)
         saveToPersistantStorage()
     }
     

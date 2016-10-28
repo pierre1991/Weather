@@ -20,8 +20,12 @@ class City: NSObject, NSCoding {
     private let kMain = "main"
     private let kTemperatue = "temp"
     private let kHumidity = "humidity"
+    private let kPressure = "pressure"
 	private let kWind = "wind"
+    private let kSystemDictionary = "sys"
     private let kSpeed = "speed"
+    private let kSunrise = "sunrise"
+    private let kSunset = "sunset"
 	private let kCityName = "name"
     private let kId = "id"
     
@@ -30,10 +34,20 @@ class City: NSObject, NSCoding {
     var weatherDescription: String?
     var icon: String?
     var temperatureK: Double?
-    var humidity: Double?
     var speed: Double?
     var cityName: String?
+    var sunrise: Double?
+    var sunset: Double?
+    
+    var pressure: Float?
+    var convertedPressure: Float? {
+        guard let pressure = pressure else {return nil}
+        return Float((pressure * 0.0002953) * (100))
+    }
+    
     var id: Double?
+    
+    var humidity: Double?
     
     var temperatureC: Double? {
         get {
@@ -55,6 +69,10 @@ class City: NSObject, NSCoding {
         }
     }
     
+
+    	
+    
+    
     
     init?(jsonDictionary: [String:AnyObject]) {
         if let coord = jsonDictionary[kCoordinates] as? [String:AnyObject] {
@@ -75,6 +93,9 @@ class City: NSObject, NSCoding {
             if let humidity = mainDictionary[kHumidity] as? NSNumber {
                 self.humidity = Double(humidity)
             }
+            if let pressure = mainDictionary[kPressure] as? NSNumber {
+                self.pressure = Float(pressure)
+            }
         }
         
         if let windDictionary = jsonDictionary[kWind] as? [String:AnyObject] {
@@ -90,8 +111,20 @@ class City: NSObject, NSCoding {
         if let id = jsonDictionary[kId] as? Double {
             self.id = id
         }
+        
+        if let systemDictionary = jsonDictionary[kSystemDictionary] as? [String:AnyObject] {
+            if let sunrise = systemDictionary[kSunrise] as? Double {
+                self.sunrise = sunrise
+            }
+            if let sunset = systemDictionary[kSunset] as? Double {
+                self.sunset = sunset
+            }
+        }
     }
     
+    
+    
+    //NSCoding
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.cityName, forKey: NSCity)
         aCoder.encode(self.id, forKey: NSId)
