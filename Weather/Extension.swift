@@ -8,6 +8,46 @@
 
 import Foundation
 
+extension Array where Element: Equatable {
+    
+    public func uniq() -> [Element] {
+        var arrayCopy = self
+        arrayCopy.uniqInPlace()
+        
+        return arrayCopy
+    }
+    
+    mutating public func uniqInPlace() {
+        var seen = [Element]()
+        var index = 0
+        for element in self {
+            if seen.contains(element) {
+                remove(at: index)
+            } else {
+                seen.append(element)
+                index += 1
+            }
+        }
+    }
+}
+
+extension Array where Element: Equatable {
+    
+    mutating func distinct() {
+        var uniqueElements: [Element] = []
+        
+        for elem in self {
+            if !uniqueElements.contains(elem) {
+                uniqueElements.append(elem)
+            }
+        }
+        
+        self = uniqueElements
+    }
+}
+
+
+
 func uniq<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element == T {
 
     var buffer = [T]()
@@ -21,3 +61,6 @@ func uniq<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element
     }
     return buffer
 }
+
+
+
