@@ -17,6 +17,17 @@
 		8F10A8201D2D6F1100F06E7C /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F10A81F1D2D6F1100F06E7C /* City.swift */; };
 		8F10A8231D2D816000F06E7C /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F10A8221D2D816000F06E7C /* WeatherController.swift */; };
 		8F10A8251D2DA8CA00F06E7C /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F10A8241D2DA8CA00F06E7C /* WeatherViewController.swift */; };
+		8F4C2A3E1DC7077B00B899A6 /* AkiraTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C2A321DC7077B00B899A6 /* AkiraTextField.swift */; };
+		8F4C2A3F1DC7077B00B899A6 /* HoshiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C2A331DC7077B00B899A6 /* HoshiTextField.swift */; };
+		8F4C2A401DC7077B00B899A6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F4C2A341DC7077B00B899A6 /* Info.plist */; };
+		8F4C2A411DC7077B00B899A6 /* IsaoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C2A351DC7077B00B899A6 /* IsaoTextField.swift */; };
+		8F4C2A421DC7077B00B899A6 /* JiroTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C2A361DC7077B00B899A6 /* JiroTextField.swift */; };
+		8F4C2A431DC7077B00B899A6 /* KaedeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C2A371DC7077B00B899A6 /* KaedeTextField.swift */; };
+		8F4C2A441DC7077B00B899A6 /* MadokaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C2A381DC7077B00B899A6 /* MadokaTextField.swift */; };
+		8F4C2A451DC7077B00B899A6 /* MinoruTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C2A391DC7077B00B899A6 /* MinoruTextField.swift */; };
+		8F4C2A461DC7077B00B899A6 /* TextFieldsEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C2A3B1DC7077B00B899A6 /* TextFieldsEffects.swift */; };
+		8F4C2A471DC7077B00B899A6 /* YokoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C2A3C1DC7077B00B899A6 /* YokoTextField.swift */; };
+		8F4C2A481DC7077B00B899A6 /* YoshikoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4C2A3D1DC7077B00B899A6 /* YoshikoTextField.swift */; };
 		8F7314541D7F36AB0025FD71 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7314531D7F36AB0025FD71 /* CoreLocation.framework */; };
 		8F802AE41DAC1778006F8693 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F802AE31DAC1778006F8693 /* WeatherIcon.swift */; };
 		8F802AE71DAC4486006F8693 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F802AE61DAC4486006F8693 /* CityTableViewCell.swift */; };
@@ -60,6 +71,18 @@
 		8F10A81F1D2D6F1100F06E7C /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		8F10A8221D2D816000F06E7C /* WeatherController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherController.swift; sourceTree = "<group>"; };
 		8F10A8241D2DA8CA00F06E7C /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		8F4C2A321DC7077B00B899A6 /* AkiraTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AkiraTextField.swift; sourceTree = "<group>"; };
+		8F4C2A331DC7077B00B899A6 /* HoshiTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoshiTextField.swift; sourceTree = "<group>"; };
+		8F4C2A341DC7077B00B899A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F4C2A351DC7077B00B899A6 /* IsaoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsaoTextField.swift; sourceTree = "<group>"; };
+		8F4C2A361DC7077B00B899A6 /* JiroTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JiroTextField.swift; sourceTree = "<group>"; };
+		8F4C2A371DC7077B00B899A6 /* KaedeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaedeTextField.swift; sourceTree = "<group>"; };
+		8F4C2A381DC7077B00B899A6 /* MadokaTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MadokaTextField.swift; sourceTree = "<group>"; };
+		8F4C2A391DC7077B00B899A6 /* MinoruTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinoruTextField.swift; sourceTree = "<group>"; };
+		8F4C2A3A1DC7077B00B899A6 /* TextFieldEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldEffects.h; sourceTree = "<group>"; };
+		8F4C2A3B1DC7077B00B899A6 /* TextFieldsEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldsEffects.swift; sourceTree = "<group>"; };
+		8F4C2A3C1DC7077B00B899A6 /* YokoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YokoTextField.swift; sourceTree = "<group>"; };
+		8F4C2A3D1DC7077B00B899A6 /* YoshikoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoshikoTextField.swift; sourceTree = "<group>"; };
 		8F7314531D7F36AB0025FD71 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		8F802AE31DAC1778006F8693 /* WeatherIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherIcon.swift; sourceTree = "<group>"; };
 		8F802AE61DAC4486006F8693 /* CityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
@@ -122,6 +145,7 @@
 				8F10A8011D2D624400F06E7C /* WeatherTests */,
 				8F10A80C1D2D624400F06E7C /* WeatherUITests */,
 				8F10A7EB1D2D624400F06E7C /* Products */,
+				8F4C2A491DC7078100B899A6 /* TextFieldEffects */,
 			);
 			sourceTree = "<group>";
 		};
@@ -192,6 +216,25 @@
 				8FA1B02A1D9DCAE4007CD115 /* CityListViewController.swift */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		8F4C2A491DC7078100B899A6 /* TextFieldEffects */ = {
+			isa = PBXGroup;
+			children = (
+				8F4C2A321DC7077B00B899A6 /* AkiraTextField.swift */,
+				8F4C2A331DC7077B00B899A6 /* HoshiTextField.swift */,
+				8F4C2A341DC7077B00B899A6 /* Info.plist */,
+				8F4C2A351DC7077B00B899A6 /* IsaoTextField.swift */,
+				8F4C2A361DC7077B00B899A6 /* JiroTextField.swift */,
+				8F4C2A371DC7077B00B899A6 /* KaedeTextField.swift */,
+				8F4C2A381DC7077B00B899A6 /* MadokaTextField.swift */,
+				8F4C2A391DC7077B00B899A6 /* MinoruTextField.swift */,
+				8F4C2A3A1DC7077B00B899A6 /* TextFieldEffects.h */,
+				8F4C2A3B1DC7077B00B899A6 /* TextFieldsEffects.swift */,
+				8F4C2A3C1DC7077B00B899A6 /* YokoTextField.swift */,
+				8F4C2A3D1DC7077B00B899A6 /* YoshikoTextField.swift */,
+			);
+			name = TextFieldEffects;
 			sourceTree = "<group>";
 		};
 		8F802AE81DAC4837006F8693 /* View */ = {
@@ -321,6 +364,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F4C2A401DC7077B00B899A6 /* Info.plist in Resources */,
 				8F10A7F81D2D624400F06E7C /* LaunchScreen.storyboard in Resources */,
 				8F10A7F51D2D624400F06E7C /* Assets.xcassets in Resources */,
 				8F10A7F31D2D624400F06E7C /* Main.storyboard in Resources */,
@@ -348,16 +392,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F4C2A3E1DC7077B00B899A6 /* AkiraTextField.swift in Sources */,
+				8F4C2A471DC7077B00B899A6 /* YokoTextField.swift in Sources */,
 				8FA1B06F1D9F14A3007CD115 /* Extension.swift in Sources */,
+				8F4C2A431DC7077B00B899A6 /* KaedeTextField.swift in Sources */,
 				8F802AE41DAC1778006F8693 /* WeatherIcon.swift in Sources */,
+				8F4C2A461DC7077B00B899A6 /* TextFieldsEffects.swift in Sources */,
 				8FA1B0221D9DB16B007CD115 /* ColorPalette.swift in Sources */,
+				8F4C2A481DC7077B00B899A6 /* YoshikoTextField.swift in Sources */,
 				8F10A8201D2D6F1100F06E7C /* City.swift in Sources */,
 				8FA1B0201D9DB105007CD115 /* AppearanceController.swift in Sources */,
 				8FA1B02B1D9DCAE4007CD115 /* CityListViewController.swift in Sources */,
 				8F10A8251D2DA8CA00F06E7C /* WeatherViewController.swift in Sources */,
 				8F10A7EE1D2D624400F06E7C /* AppDelegate.swift in Sources */,
 				8F10A81D1D2D6BE200F06E7C /* NetworkController.swift in Sources */,
+				8F4C2A451DC7077B00B899A6 /* MinoruTextField.swift in Sources */,
+				8F4C2A441DC7077B00B899A6 /* MadokaTextField.swift in Sources */,
 				8F10A8231D2D816000F06E7C /* WeatherController.swift in Sources */,
+				8F4C2A421DC7077B00B899A6 /* JiroTextField.swift in Sources */,
+				8F4C2A411DC7077B00B899A6 /* IsaoTextField.swift in Sources */,
+				8F4C2A3F1DC7077B00B899A6 /* HoshiTextField.swift in Sources */,
 				8F802AE71DAC4486006F8693 /* CityTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
