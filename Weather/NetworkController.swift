@@ -34,7 +34,7 @@ class NetworkController {
         
         let dataTask = session.dataTask(with: url, completionHandler: { (data, _, error) in
             guard let data = data else {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "")
                 completion(nil)
                 return
             }
