@@ -132,6 +132,7 @@
 		8F043C0B1D9C5D8D000539F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F4C2A491DC7078100B899A6 /* TextFieldEffects */,
 				8F7314531D7F36AB0025FD71 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
@@ -145,7 +146,6 @@
 				8F10A8011D2D624400F06E7C /* WeatherTests */,
 				8F10A80C1D2D624400F06E7C /* WeatherUITests */,
 				8F10A7EB1D2D624400F06E7C /* Products */,
-				8F4C2A491DC7078100B899A6 /* TextFieldEffects */,
 			);
 			sourceTree = "<group>";
 		};
