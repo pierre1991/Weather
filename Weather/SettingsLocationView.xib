@@ -30,6 +30,9 @@
                     <state key="normal" title="settings">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="settingsButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="2iZ-HX-xy1"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KE2-lH-YK3">
                     <rect key="frame" x="60" y="290" width="160" height="30"/>
@@ -37,6 +40,9 @@
                     <state key="normal" title="cancel">
                         <color key="titleColor" red="1" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="cancelButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="OMP-lO-uhx"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECv-uw-o3b">
                     <rect key="frame" x="60" y="152" width="160" height="36"/>
