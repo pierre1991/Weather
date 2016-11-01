@@ -22,15 +22,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="weather_logo" translatesAutoresizingMaskIntoConstraints="NO" id="8eO-YU-m66">
-                                <rect key="frame" x="78" y="194" width="164" height="120.5"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="add a location or use your current location for weather" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXz-zG-GBy">
-                                <rect key="frame" x="31" y="367.5" width="258" height="46.5"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="cNc-IH-bg1">
                                 <rect key="frame" x="30" y="72" width="260" height="440"/>
                                 <subviews>
@@ -66,33 +57,15 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter city..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uQY-hf-ZzD" customClass="YokoTextField" customModule="Weather" customModuleProvider="target">
-                                <rect key="frame" x="31" y="368" width="258" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="activeBorderColor">
-                                        <color key="value" red="0.3921568627" green="0.99607843139999996" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="inactiveBorderColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.3921568627" green="0.99607843139999996" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="foregroundColor">
-                                        <color key="value" red="0.19215686274509802" green="0.29411764705882354" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outlet property="delegate" destination="Y5w-2e-r1g" id="D3q-BJ-Wv6"/>
-                                </connections>
-                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="weather_logo" translatesAutoresizingMaskIntoConstraints="NO" id="8eO-YU-m66">
+                                <rect key="frame" x="78" y="194" width="164" height="120"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="add a location or use your current location for weather" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXz-zG-GBy">
+                                <rect key="frame" x="31" y="367" width="258" height="47"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uY2-lQ-s1M">
                                 <rect key="frame" x="107" y="420" width="106" height="32"/>
                                 <color key="backgroundColor" red="0.098039215686274508" green="0.22352941176470587" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -124,9 +97,32 @@
                                 <state key="normal" image="navigattion_button"/>
                                 <connections>
                                     <action selector="cityListButtonTapped:" destination="Y5w-2e-r1g" eventType="touchUpInside" id="rLU-cz-KcX"/>
-                                    <segue destination="xdX-bP-2qW" kind="show" id="cuq-pd-XDJ"/>
+                                    <segue destination="xdX-bP-2qW" kind="show" identifier="toCityDetailView" id="cuq-pd-XDJ"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter city..." minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="uQY-hf-ZzD" customClass="HoshiTextField" customModule="Weather" customModuleProvider="target">
+                                <rect key="frame" x="31" y="364" width="258" height="46"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.2901960784" green="0.42745098040000001" blue="0.74117647060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="Y5w-2e-r1g" id="D3q-BJ-Wv6"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.066666666666666666" green="0.14117647058823529" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -137,7 +133,10 @@
                             <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="uY2-lQ-s1M" secondAttribute="bottom" constant="116" id="6Gs-j6-LZJ"/>
                             <constraint firstItem="8eO-YU-m66" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="130" id="8Ra-s1-TL2"/>
                             <constraint firstAttribute="trailing" secondItem="tXz-zG-GBy" secondAttribute="trailing" constant="31" id="D69-ix-hOh"/>
+                            <constraint firstAttribute="trailing" secondItem="uQY-hf-ZzD" secondAttribute="trailing" constant="31" id="ELx-Um-EJk"/>
                             <constraint firstItem="uY2-lQ-s1M" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="107" id="LAO-Ws-dRz"/>
+                            <constraint firstItem="uQY-hf-ZzD" firstAttribute="top" secondItem="8eO-YU-m66" secondAttribute="bottom" constant="49.5" id="RXn-9f-zMw"/>
+                            <constraint firstItem="uY2-lQ-s1M" firstAttribute="top" secondItem="uQY-hf-ZzD" secondAttribute="bottom" constant="10" id="TjX-eR-V8G"/>
                             <constraint firstItem="tgX-Qz-agS" firstAttribute="top" secondItem="Lx4-gd-vjM" secondAttribute="bottom" constant="456" id="UB7-7V-cpC"/>
                             <constraint firstItem="8eO-YU-m66" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="78" id="ZwK-4N-rTY"/>
                             <constraint firstItem="tXz-zG-GBy" firstAttribute="top" secondItem="8eO-YU-m66" secondAttribute="bottom" constant="53" id="ckJ-Qc-rz4"/>
@@ -149,6 +148,7 @@
                             <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="tgX-Qz-agS" secondAttribute="bottom" id="oWc-kp-Tiu"/>
                             <constraint firstItem="V28-Dh-GFz" firstAttribute="top" secondItem="zgQ-BD-eag" secondAttribute="bottom" id="ptz-Lf-8e9"/>
                             <constraint firstAttribute="trailing" secondItem="zgQ-BD-eag" secondAttribute="trailing" id="sAP-vB-pN9"/>
+                            <constraint firstItem="uQY-hf-ZzD" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" constant="31" id="tKK-Ds-MuJ"/>
                             <constraint firstItem="tgX-Qz-agS" firstAttribute="leading" secondItem="29y-FQ-LGn" secondAttribute="leading" id="tT1-Pg-f68"/>
                         </constraints>
                     </view>
@@ -201,7 +201,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="219"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Ug-cf-58y" id="xfw-pX-qq3">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="218"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="219"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfe-dv-jfd">
@@ -220,21 +220,21 @@
                                                     <rect key="frame" x="195" y="65" width="117" height="94"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Sunrise:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKg-tt-PDK">
-                                                    <rect key="frame" x="8" y="59" width="52" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="sunrise:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKg-tt-PDK">
+                                                    <rect key="frame" x="8" y="59" width="51" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
                                                     <color key="textColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Humidity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufs-Wg-y5m">
-                                                    <rect key="frame" x="8" y="119" width="61" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="humidity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufs-Wg-y5m">
+                                                    <rect key="frame" x="8" y="119" width="59" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                     <color key="textColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" fixedFrame="YES" text="Pressure:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ia1-Ck-0xg">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" fixedFrame="YES" text="pressure:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ia1-Ck-0xg">
                                                     <rect key="frame" x="8" y="146" width="60" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
@@ -255,8 +255,8 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" fixedFrame="YES" text="Sunset:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkS-Tf-7mB">
-                                                    <rect key="frame" x="8" y="84" width="49" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" fixedFrame="YES" text="sunset:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkS-Tf-7mB">
+                                                    <rect key="frame" x="8" y="84" width="47" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
                                                     <color key="textColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
@@ -302,6 +302,10 @@
                                             <outlet property="descriptionLabel" destination="TS5-b9-cIz" id="dB1-6X-rod"/>
                                             <outlet property="humidityLabel" destination="T00-qi-MTR" id="xgP-Rv-I4g"/>
                                             <outlet property="pressureLabel" destination="wyW-eo-T5t" id="62E-0C-3Mp"/>
+                                            <outlet property="staticHumidityLabel" destination="Ufs-Wg-y5m" id="e1v-eh-oIJ"/>
+                                            <outlet property="staticPressureLabel" destination="Ia1-Ck-0xg" id="s7F-Ye-S1x"/>
+                                            <outlet property="staticSunriseLabel" destination="GKg-tt-PDK" id="Q7v-bw-Lbh"/>
+                                            <outlet property="staticSunsetLabel" destination="OkS-Tf-7mB" id="fod-Zn-tsW"/>
                                             <outlet property="sunriseLabel" destination="PoJ-M9-giQ" id="0j7-D0-yYV"/>
                                             <outlet property="sunsetLabel" destination="tBm-al-zde" id="5FM-mQ-8cS"/>
                                             <outlet property="weatherIconView" destination="MFo-v4-9OG" id="pC9-0G-su8"/>
@@ -317,10 +321,10 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weather_logo" translatesAutoresizingMaskIntoConstraints="NO" id="VL4-dz-VPF">
-                                        <rect key="frame" x="78" y="130" width="164" height="76.5"/>
+                                        <rect key="frame" x="78" y="130" width="164" height="76"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="you don't have any saved cities to view the weather for..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7Y-qy-j4m">
-                                        <rect key="frame" x="31" y="259.5" width="258" height="46.5"/>
+                                        <rect key="frame" x="31" y="259" width="258" height="47"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -361,7 +365,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a35-Cm-mfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="465" y="430"/>
+            <point key="canvasLocation" x="136" y="429"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sxc-9r-U8N">

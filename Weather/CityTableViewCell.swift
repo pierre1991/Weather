@@ -11,19 +11,14 @@ import UIKit
 class CityTableViewCell: UITableViewCell {
 
     //MARK: Properties
-    class var defaultHeight: CGFloat {
-        get {
-            return 46
-        }
-    }
-    
-    class var expandedHeight: CGFloat {
-        get {
-            return 220
-        }
-    }
-    
     var isExpanded = false
+    
+    
+    //MARK: Static Outlets
+    @IBOutlet weak var staticSunriseLabel: UILabel!
+    @IBOutlet weak var staticSunsetLabel: UILabel!
+    @IBOutlet weak var staticHumidityLabel: UILabel!
+    @IBOutlet weak var staticPressureLabel: UILabel!
     
     
     //MARK: IBOutlets
@@ -97,5 +92,19 @@ class CityTableViewCell: UITableViewCell {
         return dateFormatter.string(from: date as Date)
     }
 
+    
+    func hideViews() {
+        staticSunriseLabel.isHidden = true
+        staticSunsetLabel.isHidden = true
+        staticHumidityLabel.isHidden = true
+        staticPressureLabel.isHidden = true
+        
+        sunriseLabel.isHidden = true
+        sunsetLabel.isHidden = true
+    	humidityLabel.isHidden = true
+       	pressureLabel.isHidden = true
+    	descriptionLabel.isHidden = true
+    	weatherIconView.isHidden = true
+    }
 
 }
