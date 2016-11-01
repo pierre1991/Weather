@@ -61,22 +61,30 @@ extension CityListViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! CityTableViewCell
+        
+        if selectedIndexPath?.row != indexPath.row {
+            cell.hideViews()
+        }
+    }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             WeatherController.sharedController.cityArray.remove(at: indexPath.row)
             WeatherController.sharedController.saveToPersistantStorage()
-            
+                
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedIndexPath = indexPath as NSIndexPath?
+		self.selectedIndexPath = indexPath as NSIndexPath?
         tableView.beginUpdates()
         tableView.endUpdates()
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (selectedIndexPath != nil) && (indexPath.row == selectedIndexPath?.row) {
@@ -84,7 +92,5 @@ extension CityListViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return 46
     }
-    
-    
-    
+
 }
