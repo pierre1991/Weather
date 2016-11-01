@@ -21,6 +21,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     var keyboardHeight: CGFloat!
     
+    var statusBarHidden: Bool = false
+    
+    
+	//MARK: Further UI
+    var blurEffectView: UIVisualEffectView!
+
+    var settingsLocationView: SettingsLocationView!
     
     
     //MARK: IBOutlets
@@ -39,14 +46,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var addCityButton: UIButton!
 
     
-    
     //MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupOffscreenViews()
-        //setupSearchFields()
-        
+    
         searchField.keyboardAppearance = .dark
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -67,20 +72,22 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                 self.temperatureLabel.layer.transform = CATransform3DIdentity
                 self.weatherIcon.layer.transform = CATransform3DIdentity
                 self.descriptionLabel.layer.transform = CATransform3DIdentity
-                
                 self.addCityButton.layer.transform = CATransform3DIdentity
             })
-            
         }
     }
 
     
+    //MARK: Status Bar
+    override var prefersStatusBarHidden: Bool {
+        return statusBarHidden
+    }
+
     
     //MARK: Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         searchField.resignFirstResponder()
     }
-    
     
     
     //MARK: Location
@@ -89,56 +96,73 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         locationLat = locationValue.latitude
         locationLong = locationValue.longitude
     }
-    
-    
-    
+
     
     //MARK: IBActions
     @IBAction func locationButtonTapped(_ sender: AnyObject) {
         searchField.resignFirstResponder()
         
-        if (CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == .authorizedWhenInUse) {
-            locationManager.delegate = self
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-            
-            locationLat = (locationManager.location?.coordinate.latitude)!
-            locationLong = (locationManager.location?.coordinate.longitude)!
-            
-            getAndUpdateWeatherForLocation()
-        } else {
-            locationManager.delegate = self
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-            
-            getAndUpdateWeatherForLocation()
-        }
-        
-        
-        moveLogoView()
-        moveSearchViews()
-        
-        UIView.animate(withDuration: 1.0, animations: {
-            self.cityName.layer.transform = CATransform3DIdentity
-            self.temperatureLabel.layer.transform = CATransform3DIdentity
-            self.weatherIcon.layer.transform = CATransform3DIdentity
-            self.descriptionLabel.layer.transform = CATransform3DIdentity
-            
-            self.addCityButton.layer.transform = CATransform3DIdentity
-        })
-    }
+        if CLLocationManager.locationServicesEnabled() {
+            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+                locationManager.delegate = self
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.startUpdatingLocation()
 
-    
+                locationLat = (locationManager.location?.coordinate.latitude)!
+                locationLong = (locationManager.location?.coordinate.longitude)!
+
+                getAndUpdateWeatherForLocation()
+                
+                moveLogoView()
+                moveSearchViews()
+                
+                UIView.animate(withDuration: 1.0, animations: {
+                    self.cityName.layer.transform = CATransform3DIdentity
+                    self.temperatureLabel.layer.transform = CATransform3DIdentity
+                    self.weatherIcon.layer.transform = CATransform3DIdentity
+                    self.descriptionLabel.layer.transform = CATransform3DIdentity
+                    
+                    self.addCityButton.layer.transform = CATransform3DIdentity
+                })
+            } else {
+             	if let settingsLocationView = UIView.loadFromNibNamed(nibNamed: "SettingsLocationView") as? SettingsLocationView {
+                    
+                    self.settingsLocationView = settingsLocationView
+                    
+                    settingsLocationView.settingsViewDelegate = self
+                    
+                    settingsLocationView.frame = CGRect(x: (UIScreen.main.bounds.width / 2) - (settingsLocationView.frame.width / 2), y: (self.view.frame.height / 2) - (settingsLocationView.frame.height / 2), width: settingsLocationView.frame.width, height: settingsLocationView.frame.height)
+                    
+                    navigationController?.navigationItem.leftBarButtonItem?.isEnabled = false
+                    navigationController?.navigationItem.rightBarButtonItem?.isEnabled = false
+                    navigationController?.setNavigationBarHidden(true, animated: false)
+                    
+                    statusBarHidden = true
+                    setNeedsStatusBarAppearanceUpdate()
+
+                    let viewBlur = UIBlurEffect(style: .dark)
+                    blurEffectView = UIVisualEffectView(effect: viewBlur)
+                    blurEffectView.frame = self.view.bounds
+                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                    
+                    self.view.addSubview(blurEffectView)
+                
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(removeSettingsLocationView))
+               		blurEffectView.addGestureRecognizer(tap)
+                    
+                    self.view.addSubview(settingsLocationView)
+                }
+            }
+        }
+    }
     
     
     @IBAction func searchBarButtonTapped(_ sender: AnyObject) {
         moveLocationViews()
         
-        
         UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4, options: .curveEaseOut, animations: {
-                    self.initialLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
+            self.initialLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
             }, completion: nil)
         
         UIView.animate(withDuration: 0.8, animations: {
@@ -148,8 +172,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         setupOnscreenViews()
     }
 
-    
-    
     
     @IBAction func searchButtonTapped(_ sender: AnyObject) {
         if let text = searchField.text {
@@ -166,7 +188,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                         
                         if let temperatureF = weatherResult.temperatureF {
                             let formattedTemp = String(format: "%.0f", temperatureF)
-                            self.temperatureLabel.text = String("\(formattedTemp)°")
+                            self.temperatureLabel.text = String("\(formattedTemp)°F")
                         }
                         
                         if let weatherIcon = weatherResult.icon {
@@ -204,7 +226,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             print("no text")
         }
-        
     }
     
     
@@ -216,6 +237,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         guard let city = self.city else {return}
         
         WeatherController.sharedController.addCity(city: city)
+        
+        performSegue(withIdentifier: "toCityDetailView", sender: self)
     }
 
     
@@ -257,7 +280,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    
     //Removes Weather search views and search views off view
     func setupOffscreenViews() {
         cityName.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
@@ -271,12 +293,11 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         addCityButton.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, +self.view.frame.height, 0)
     }
     
-    
     //Moves searchField and searchButton onto the view
     func setupOnscreenViews() {
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: { 
-//            self.weatherIcon.layer.transform = CATransform3DIdentity
-//            }, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: { 
+            self.weatherLogo.layer.transform = CATransform3DIdentity
+            }, completion: nil)
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: {
             self.searchField.layer.transform = CATransform3DIdentity
@@ -307,6 +328,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         descriptionLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -self.view.frame.width, 0, 0)
     }
     
+    
+    //MARK: Helper Functions
+    func removeSettingsLocationView() {
+        self.settingsLocationView.removeFromSuperview()
+        self.blurEffectView.removeFromSuperview()
+        showNavigationBar()
+    }
     
     
     //MARK: Keyboard
@@ -339,14 +367,26 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 }
 
 
+extension WeatherViewController: SettingsLocationViewDelegate {
+    
+    func blurEffectRemoved(_ sender: SettingsLocationView) {
+        self.blurEffectView.removeFromSuperview()
+    }
+    
+    func showNavigationBar() {
+        statusBarHidden = false
+        setNeedsStatusBarAppearanceUpdate()
+        
+        self.navigationController?.setNavigationBarHidden(false , animated: false )
+    }
+    
+}
+
+
 extension WeatherViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         searchField.text = ""
     }
 
-    
-    
-
 }
-
