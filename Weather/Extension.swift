@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension Array where Element: Equatable {
     
@@ -62,5 +63,13 @@ func uniq<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element
     return buffer
 }
 
+
+extension UIView {
+    
+    class func loadFromNibNamed(nibNamed: String, bundle: Bundle? = nil) -> UIView? {
+        return UINib(nibName: nibNamed, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
+    }
+    
+}
 
 
