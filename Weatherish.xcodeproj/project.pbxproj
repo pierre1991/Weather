@@ -57,16 +57,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8F10A7EA1D2D624400F06E7C /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F10A7EA1D2D624400F06E7C /* Weatherish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weatherish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F10A7ED1D2D624400F06E7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F10A7F21D2D624400F06E7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8F10A7F41D2D624400F06E7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F10A7F71D2D624400F06E7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F10A7F91D2D624400F06E7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8F10A7FE1D2D624400F06E7C /* WeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F10A7FE1D2D624400F06E7C /* WeatherishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F10A8021D2D624400F06E7C /* WeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTests.swift; sourceTree = "<group>"; };
 		8F10A8041D2D624400F06E7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8F10A8091D2D624400F06E7C /* WeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F10A8091D2D624400F06E7C /* WeatherishUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherishUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F10A80D1D2D624400F06E7C /* WeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUITests.swift; sourceTree = "<group>"; };
 		8F10A80F1D2D624400F06E7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F10A81C1D2D6BE200F06E7C /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
@@ -156,9 +156,9 @@
 		8F10A7EB1D2D624400F06E7C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8F10A7EA1D2D624400F06E7C /* Weather.app */,
-				8F10A7FE1D2D624400F06E7C /* WeatherTests.xctest */,
-				8F10A8091D2D624400F06E7C /* WeatherUITests.xctest */,
+				8F10A7EA1D2D624400F06E7C /* Weatherish.app */,
+				8F10A7FE1D2D624400F06E7C /* WeatherishTests.xctest */,
+				8F10A8091D2D624400F06E7C /* WeatherishUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,7 +175,8 @@
 				8FA1B0231D9DB22F007CD115 /* Helpers */,
 				8F043C0B1D9C5D8D000539F3 /* Frameworks */,
 			);
-			path = Weather;
+			name = Weather;
+			path = Weatherish;
 			sourceTree = "<group>";
 		};
 		8F10A8011D2D624400F06E7C /* WeatherTests */ = {
@@ -265,9 +266,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8F10A7E91D2D624400F06E7C /* Weather */ = {
+		8F10A7E91D2D624400F06E7C /* Weatherish */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8F10A8121D2D624400F06E7C /* Build configuration list for PBXNativeTarget "Weather" */;
+			buildConfigurationList = 8F10A8121D2D624400F06E7C /* Build configuration list for PBXNativeTarget "Weatherish" */;
 			buildPhases = (
 				8F10A7E61D2D624400F06E7C /* Sources */,
 				8F10A7E71D2D624400F06E7C /* Frameworks */,
@@ -277,14 +278,14 @@
 			);
 			dependencies = (
 			);
-			name = Weather;
+			name = Weatherish;
 			productName = Weather;
-			productReference = 8F10A7EA1D2D624400F06E7C /* Weather.app */;
+			productReference = 8F10A7EA1D2D624400F06E7C /* Weatherish.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8F10A7FD1D2D624400F06E7C /* WeatherTests */ = {
+		8F10A7FD1D2D624400F06E7C /* WeatherishTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8F10A8151D2D624400F06E7C /* Build configuration list for PBXNativeTarget "WeatherTests" */;
+			buildConfigurationList = 8F10A8151D2D624400F06E7C /* Build configuration list for PBXNativeTarget "WeatherishTests" */;
 			buildPhases = (
 				8F10A7FA1D2D624400F06E7C /* Sources */,
 				8F10A7FB1D2D624400F06E7C /* Frameworks */,
@@ -295,14 +296,14 @@
 			dependencies = (
 				8F10A8001D2D624400F06E7C /* PBXTargetDependency */,
 			);
-			name = WeatherTests;
+			name = WeatherishTests;
 			productName = WeatherTests;
-			productReference = 8F10A7FE1D2D624400F06E7C /* WeatherTests.xctest */;
+			productReference = 8F10A7FE1D2D624400F06E7C /* WeatherishTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8F10A8081D2D624400F06E7C /* WeatherUITests */ = {
+		8F10A8081D2D624400F06E7C /* WeatherishUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8F10A8181D2D624400F06E7C /* Build configuration list for PBXNativeTarget "WeatherUITests" */;
+			buildConfigurationList = 8F10A8181D2D624400F06E7C /* Build configuration list for PBXNativeTarget "WeatherishUITests" */;
 			buildPhases = (
 				8F10A8051D2D624400F06E7C /* Sources */,
 				8F10A8061D2D624400F06E7C /* Frameworks */,
@@ -313,9 +314,9 @@
 			dependencies = (
 				8F10A80B1D2D624400F06E7C /* PBXTargetDependency */,
 			);
-			name = WeatherUITests;
+			name = WeatherishUITests;
 			productName = WeatherUITests;
-			productReference = 8F10A8091D2D624400F06E7C /* WeatherUITests.xctest */;
+			productReference = 8F10A8091D2D624400F06E7C /* WeatherishUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -345,7 +346,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8F10A7E51D2D624400F06E7C /* Build configuration list for PBXProject "Weather" */;
+			buildConfigurationList = 8F10A7E51D2D624400F06E7C /* Build configuration list for PBXProject "Weatherish" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -358,9 +359,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8F10A7E91D2D624400F06E7C /* Weather */,
-				8F10A7FD1D2D624400F06E7C /* WeatherTests */,
-				8F10A8081D2D624400F06E7C /* WeatherUITests */,
+				8F10A7E91D2D624400F06E7C /* Weatherish */,
+				8F10A7FD1D2D624400F06E7C /* WeatherishTests */,
+				8F10A8081D2D624400F06E7C /* WeatherishUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -445,12 +446,12 @@
 /* Begin PBXTargetDependency section */
 		8F10A8001D2D624400F06E7C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8F10A7E91D2D624400F06E7C /* Weather */;
+			target = 8F10A7E91D2D624400F06E7C /* Weatherish */;
 			targetProxy = 8F10A7FF1D2D624400F06E7C /* PBXContainerItemProxy */;
 		};
 		8F10A80B1D2D624400F06E7C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8F10A7E91D2D624400F06E7C /* Weather */;
+			target = 8F10A7E91D2D624400F06E7C /* Weatherish */;
 			targetProxy = 8F10A80A1D2D624400F06E7C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -570,7 +571,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VXY4XHS49U;
-				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_FILE = Weatherish/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Pierre.Weatherish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -583,7 +584,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VXY4XHS49U;
-				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_FILE = Weatherish/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Pierre.Weatherish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -600,7 +601,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Pierre.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/Weather";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weatherish.app/Weatherish";
 			};
 			name = Debug;
 		};
@@ -613,7 +614,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Pierre.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/Weather";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weatherish.app/Weatherish";
 			};
 			name = Release;
 		};
@@ -644,7 +645,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8F10A7E51D2D624400F06E7C /* Build configuration list for PBXProject "Weather" */ = {
+		8F10A7E51D2D624400F06E7C /* Build configuration list for PBXProject "Weatherish" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8F10A8101D2D624400F06E7C /* Debug */,
@@ -653,7 +654,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8F10A8121D2D624400F06E7C /* Build configuration list for PBXNativeTarget "Weather" */ = {
+		8F10A8121D2D624400F06E7C /* Build configuration list for PBXNativeTarget "Weatherish" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8F10A8131D2D624400F06E7C /* Debug */,
@@ -662,7 +663,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8F10A8151D2D624400F06E7C /* Build configuration list for PBXNativeTarget "WeatherTests" */ = {
+		8F10A8151D2D624400F06E7C /* Build configuration list for PBXNativeTarget "WeatherishTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8F10A8161D2D624400F06E7C /* Debug */,
@@ -671,7 +672,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8F10A8181D2D624400F06E7C /* Build configuration list for PBXNativeTarget "WeatherUITests" */ = {
+		8F10A8181D2D624400F06E7C /* Build configuration list for PBXNativeTarget "WeatherishUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8F10A8191D2D624400F06E7C /* Debug */,
