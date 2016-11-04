@@ -23,11 +23,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     var statusBarHidden: Bool = false
     
+    var isLocationViewShowing: Bool = false
+    
     
 	//MARK: Further UI
     var blurEffectView: UIVisualEffectView!
-
-    var settingsLocationView: SettingsLocationView!
+	var settingsLocationView: SettingsLocationView!
     
     
     //MARK: IBOutlets
@@ -64,6 +65,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             locationLong = (locationManager.location?.coordinate.longitude)!
             
             moveLogoView()
+            moveSearchViews()
             
             getAndUpdateWeatherForLocation()
             
@@ -115,7 +117,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                 getAndUpdateWeatherForLocation()
                 
                 moveLogoView()
-                moveSearchViews()
+               	moveSearchViews()
                 
                 UIView.animate(withDuration: 1.0, animations: {
                     self.cityName.layer.transform = CATransform3DIdentity
@@ -152,6 +154,14 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                		blurEffectView.addGestureRecognizer(tap)
                     
                     self.view.addSubview(settingsLocationView)
+                    
+                    settingsLocationView.alpha = 0
+                    settingsLocationView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                    
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
+                        settingsLocationView.transform = CGAffineTransform.identity
+                        settingsLocationView.alpha = 1
+                    }, completion: nil)
                 }
             }
         }
@@ -198,12 +208,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                         self.descriptionLabel.text = weatherResult.weatherDescription
                         
                         self.moveSearchViews()
+
                         UIView.animate(withDuration: 0.4, animations: {
                         	self.weatherLogo.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
                         })
                         
-                        
-                        UIView.animate(withDuration: 1.0, animations: { 
+                        UIView.animate(withDuration: 1.0, animations: {
                             self.cityName.layer.transform = CATransform3DIdentity
                             self.temperatureLabel.layer.transform = CATransform3DIdentity
                             self.weatherIcon.layer.transform = CATransform3DIdentity
@@ -273,12 +283,10 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     //MARK: View Functions
     func setupSearchFields() {
         let color = UIColor.white
-        
         searchField.layer.borderColor = color.cgColor
         searchField.borderStyle = .line
         searchField.backgroundColor = .mediumDarkBlue()
     }
-    
     
     //Removes Weather search views and search views off view
     func setupOffscreenViews() {
@@ -297,21 +305,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     func setupOnscreenViews() {
         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: { 
             self.weatherLogo.layer.transform = CATransform3DIdentity
-            }, completion: nil)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: {
             self.searchField.layer.transform = CATransform3DIdentity
-            }, completion: nil)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: { 
             self.searchButton.layer.transform = CATransform3DIdentity
-            }, completion: nil)
+        }, completion: nil)
     }
     
     //Move searchField, searchButton, weatherLogo off view
     func moveLogoView() {
         self.weatherLogo.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
-        self.initialLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
+		self.initialLabel.layer.transform = CATransform3DTranslate(CATransform3DIdentity, +self.view.frame.width, 0, 0)
     }
     
     func moveSearchViews() {
@@ -348,7 +350,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
         
         if isKeyboardShowing {
-            UIView.animate(withDuration: 2.0, animations: {
+            UIView.animate(withDuration: 3.0, animations: {
                 self.weatherLogo.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, -self.view.frame.height, 0)
                 
                 self.searchField.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, -((UIScreen.main.bounds.height - self.keyboardHeight) / 2) - (self.searchField.frame.height), 0)
@@ -356,7 +358,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                 
             })
         } else {
-            UIView.animate(withDuration: 2.0, animations: { 
+            UIView.animate(withDuration: 3.0, animations: {
                 self.weatherLogo.layer.transform = CATransform3DIdentity
                 self.searchField.layer.transform = CATransform3DIdentity
                 self.searchButton.layer.transform = CATransform3DIdentity
