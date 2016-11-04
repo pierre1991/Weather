@@ -33,9 +33,13 @@ class SettingsLocationView: UIView {
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        dismissAlertView()
-        
-        self.settingsViewDelegate?.showNavigationBar()
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
+        	self.alpha = 0
+            self.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        	}, completion: {(finish) in
+            	self.dismissAlertView()
+            	self.settingsViewDelegate?.showNavigationBar()
+        })
     }
     
     
