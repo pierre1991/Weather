@@ -30,13 +30,13 @@ class WeatherController {
         let url = NetworkController.searchWeatherByCity(city)
         
         NetworkController.dataAtUrl(url, completion: { (resultData) -> Void in
-            guard let resultData = resultData else {
+        	guard let resultData = resultData else {
                 print("NO DATA RETURNED")
                 completion(nil)
                 return
             }
-           
-             do {
+            
+            do {
                 let weatherAnyObject = try JSONSerialization.jsonObject(with: resultData, options: .allowFragments)
                 
                 var weatherModelObject: City?
