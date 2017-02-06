@@ -18,21 +18,21 @@ class WeatherController {
     var cityArray: [City]
     
     
+    //MARK: Init
     init() {
         self.cityArray = []
         self.loadFromPersistantStorage()
     }
     
     
-    
     //MARK: Builder Functions
-    static func getWeatherForCity(_ city: String, completion:@escaping (_ result: City?) -> Void) {
+    static func getWeatherForCity(_ city: String, completionHandler: @escaping (_ result: City?) -> Void) {
         let url = NetworkController.searchWeatherByCity(city)
         
-        NetworkController.dataAtUrl(url, completion: { (resultData) -> Void in
+        NetworkController.dataAtUrl(url, completionHandler: { (resultData) -> Void in
         	guard let resultData = resultData else {
                 print("NO DATA RETURNED")
-                completion(nil)
+                completionHandler(nil)
                 return
             }
             
@@ -41,13 +41,13 @@ class WeatherController {
                 
                 var weatherModelObject: City?
                 
-                if let weatherDictionary = weatherAnyObject as? [String:AnyObject] {
+                if let weatherDictionary = weatherAnyObject as? [String: AnyObject] {
                     weatherModelObject = City(jsonDictionary: weatherDictionary)
                 }
                 
-                completion(weatherModelObject)
+                completionHandler(weatherModelObject)
             } catch {
-                completion(nil)
+                completionHandler(nil)
             }
         })
     }
@@ -67,7 +67,7 @@ class WeatherController {
                 
                 var weatherModelObject: City?
                 
-                if let weatherDictionary = weatherAnyObject as? [String:AnyObject] {
+                if let weatherDictionary = weatherAnyObject as? [String: AnyObject] {
                     weatherModelObject = City(jsonDictionary: weatherDictionary)
                 }
                 
@@ -88,20 +88,21 @@ class WeatherController {
     
     //MARK: NSCoding
     func saveToPersistantStorage() {
-        NSKeyedArchiver.archiveRootObject(self.cityArray, toFile: self.filePath(key: kCity))
+        NSKeyedArchiver.archiveRootObject(cityArray, toFile: filePath(key: kCity))
     }
     
     func loadFromPersistantStorage() {
-        guard let unarchivedCities = NSKeyedUnarchiver.unarchiveObject(withFile: self.filePath(key: kCity)) else {return}
+        guard let unarchivedCities = NSKeyedUnarchiver.unarchiveObject(withFile: filePath(key: kCity)) else { return }
         
         self.cityArray = unarchivedCities as! [City]
     }
     
     func filePath(key: String) -> String {
         let manager = FileManager.default
-        let url = manager.urls(for: .documentDirectory, in: .allDomainsMask).first
         
-        return (url?.appendingPathComponent(key).path)!
+        guard let url = manager.urls(for: .documentDirectory, in: .allDomainsMask).first else { return "" }
+        
+        return (url.appendingPathComponent(key).path)
     }
     
 }

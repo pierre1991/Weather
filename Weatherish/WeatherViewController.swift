@@ -188,7 +188,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             if text.characters.count > 0 {
                 searchField.resignFirstResponder()
                 
-                WeatherController.getWeatherForCity(text, completion: { (result) in
+                WeatherController.getWeatherForCity(text, completionHandler: { (result) in
                     guard let weatherResult = result else {return}
                 
                     self.city = weatherResult

@@ -19,7 +19,6 @@ class CityListViewController: UIViewController {
     @IBOutlet weak var noCityView: UIView!
     
     
-    
     //MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +32,8 @@ class CityListViewController: UIViewController {
         tableView.reloadData()
     }
     
+    
+    //MARK: Status Bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
