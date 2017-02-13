@@ -46,9 +46,7 @@ class City: NSObject, NSCoding {
     }
     
     var id: Double?
-    
     var humidity: Double?
-    
     var temperatureC: Double? {
         get {
             if let temperatureK = temperatureK {
@@ -70,23 +68,19 @@ class City: NSObject, NSCoding {
     }
     
 
-    	
-    
-    
-    
-    init?(jsonDictionary: [String:AnyObject]) {
-        if let coord = jsonDictionary[kCoordinates] as? [String:AnyObject] {
+    init?(jsonDictionary: [String: AnyObject]) {
+        if let coord = jsonDictionary[kCoordinates] as? [String: AnyObject] {
             self.coordinates = coord
         }
         
-        if let arrayWeatherKey = jsonDictionary[kWeather] as? [[String:AnyObject]] {
+        if let arrayWeatherKey = jsonDictionary[kWeather] as? [[String: AnyObject]] {
             if let description = arrayWeatherKey[0][kDescription] as? String, let icon = arrayWeatherKey[0][kIcon] as? String {
                 self.weatherDescription = description
                 self.icon = icon
             }
         }
         
-        if let mainDictionary = jsonDictionary[kMain] as? [String:AnyObject] {
+        if let mainDictionary = jsonDictionary[kMain] as? [String: AnyObject] {
             if let temperatureK = mainDictionary[kTemperatue] as? NSNumber {
                 self.temperatureK = Double(temperatureK)
             }
@@ -122,8 +116,7 @@ class City: NSObject, NSCoding {
         }
     }
     
-    
-    
+
     //NSCoding
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.cityName, forKey: NSCity)
@@ -132,7 +125,7 @@ class City: NSObject, NSCoding {
     
     required init(coder aDecoder: NSCoder) {
         guard let cityName = aDecoder.decodeObject(forKey: NSCity) as? String,
-            let id = aDecoder.decodeObject(forKey: NSId) as? Double else {return}
+            let id = aDecoder.decodeObject(forKey: NSId) as? Double else { return }
         
         self.cityName = cityName
         self.id = id
